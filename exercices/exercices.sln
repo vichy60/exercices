@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exercice_nbpremier", "exerc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exercice_tri_tableau", "exercice_tri_tableau\exercice_tri_tableau.csproj", "{E3A060F7-3FC5-42F0-B72C-6125CF93F601}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "comptage_voyelles_consonnes", "comptage_voyelles_consonnes\comptage_voyelles_consonnes.csproj", "{F52E8A1C-7EBF-4499-A6D5-6ADE06B22E1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{E3A060F7-3FC5-42F0-B72C-6125CF93F601}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3A060F7-3FC5-42F0-B72C-6125CF93F601}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3A060F7-3FC5-42F0-B72C-6125CF93F601}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F52E8A1C-7EBF-4499-A6D5-6ADE06B22E1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F52E8A1C-7EBF-4499-A6D5-6ADE06B22E1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F52E8A1C-7EBF-4499-A6D5-6ADE06B22E1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F52E8A1C-7EBF-4499-A6D5-6ADE06B22E1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
