@@ -30,13 +30,14 @@ namespace exercice_Login
             }
 
 
-            Console.WriteLine("veuillez saisir votre mot de passe! (entre 6 et 12 caracteres et ne commence ni ne fini par un espace au premier et dernier) ");
-            string mdp = Console.ReadLine();
             while (!mdpCorrect)
             {
+            Console.WriteLine("veuillez saisir votre mot de passe! (entre 6 et 12 caracteres et ne commence ni ne fini par un espace au premier et dernier) ");
+            string mdp = Console.ReadLine();
+
                 try
                 {
-                    VérifMdp(mdp);
+                    VérifMdp(mdp, out mdpCorrect);
 
                 }
                 catch (FormatException e)
@@ -44,9 +45,9 @@ namespace exercice_Login
 
                     Console.WriteLine(e.Message);
                 }
+            }
                 Console.WriteLine("Votre compte a bien été créé. Un message vient de vous être envoyé");
                 Console.ReadKey();
-            }
 
 
         }
@@ -62,7 +63,7 @@ namespace exercice_Login
            
         }
         
-        static void VérifMdp(string mdp)
+        static void VérifMdp(string mdp, out bool mdpCorrect)
         {
             if (mdp.Length < 6)
             {
@@ -75,13 +76,13 @@ namespace exercice_Login
             }
             if (mdp[0]==' ')
             {
-                throw new FormatException("mot de passe trop grand!( 12 caracteres maxi!)");
+                throw new FormatException("mot de passe erroné!( pas d'espace au début svp!)");
             }
             if (mdp[mdp.Length-1]==' ')
             {
-                throw new FormatException("mot de passe trop grand!( 12 caracteres maxi!)");
+                throw new FormatException("mot de passe erroné!( pas d'espace à la fin svp!)");
             }
-                       
+            mdpCorrect = true;          
         }
 
     }
