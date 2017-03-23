@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entrainement", "Entrainement\Entrainement.csproj", "{053D8B44-3977-4715-B445-81A6C2929CC0}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "comptage_voyelles_consonnes", "comptage_voyelles_consonnes\comptage_voyelles_consonnes.csproj", "{F52E8A1C-7EBF-4499-A6D5-6ADE06B22E1C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exercice_Login", "exercice_Login\exercice_Login.csproj", "{0D5C25F5-F559-4ABF-BCA4-F79760FF16E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exerci_tri_tableau_sans_modif_origine.txt", "exerci_tri_tableau_sans_modif_origine.txt\exerci_tri_tableau_sans_modif_origine.txt.csproj", "{7A6EF42F-B7EB-462A-92B8-567C0883A3D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{0D5C25F5-F559-4ABF-BCA4-F79760FF16E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D5C25F5-F559-4ABF-BCA4-F79760FF16E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D5C25F5-F559-4ABF-BCA4-F79760FF16E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A6EF42F-B7EB-462A-92B8-567C0883A3D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A6EF42F-B7EB-462A-92B8-567C0883A3D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A6EF42F-B7EB-462A-92B8-567C0883A3D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A6EF42F-B7EB-462A-92B8-567C0883A3D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

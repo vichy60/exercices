@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6ED56C09-3341-4F33-80E0-8E114580903C}</ProjectGuid>
+    <ProjectGuid>{7A6EF42F-B7EB-462A-92B8-567C0883A3D9}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>exercice_nbpremier</RootNamespace>
-    <AssemblyName>exercice_nbpremier</AssemblyName>
+    <RootNamespace>exerci_tri_tableau_sans_modif_origine.txt</RootNamespace>
+    <AssemblyName>exerci_tri_tableau_sans_modif_origine.txt</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>

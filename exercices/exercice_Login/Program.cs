@@ -10,45 +10,55 @@ namespace exercice_Login
     {
         static void Main(string[] args)
         {
+            bool loginCorrect = false;
+            bool mdpCorrect = false;
+            while (!loginCorrect)
+            {   
             Console.WriteLine("veuillez saisir votre Login ! (5 caracteres mini");
             string login = Console.ReadLine();
+            
+
             try
             {
-                            VérifLogin(login);
+                            VérifLogin(login,out loginCorrect);
             }
             catch (FormatException e)
             {
                 Console.WriteLine(e.Message);
               
             }
+            }
 
 
             Console.WriteLine("veuillez saisir votre mot de passe! (entre 6 et 12 caracteres et ne commence ni ne fini par un espace au premier et dernier) ");
             string mdp = Console.ReadLine();
-            try
+            while (!mdpCorrect)
             {
-            VérifMdp(mdp);
+                try
+                {
+                    VérifMdp(mdp);
 
-            }
-            catch (FormatException e)
-            {
+                }
+                catch (FormatException e)
+                {
 
-                Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message);
+                }
+                Console.WriteLine("Votre compte a bien été créé. Un message vient de vous être envoyé");
+                Console.ReadKey();
             }
-            Console.WriteLine("Votre compte a bien été créé. Un message vient de vous être envoyé");
-            Console.ReadKey();
-            
 
 
         }
 
-        static void VérifLogin(string log)
+        static void VérifLogin(string log,out bool loginCorrect )
         {
          if( log.Length < 5)
             {
                 throw new FormatException("login trop petit!( min 5 caracteres!)");
             }
-         
+            loginCorrect = true;
+
            
         }
         
