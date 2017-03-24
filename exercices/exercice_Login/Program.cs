@@ -12,28 +12,28 @@ namespace exercice_Login
         {
             bool loginCorrect = false;
             bool mdpCorrect = false;
-            while (!loginCorrect)
-            {   
-            Console.WriteLine("veuillez saisir votre Login ! (5 caracteres mini");
-            string login = Console.ReadLine();
-            
 
-            try
+            while (!loginCorrect)
             {
-                            VérifLogin(login,out loginCorrect);
-            }
-            catch (FormatException e)
-            {
-                Console.WriteLine(e.Message);
-              
-            }
+                Console.WriteLine("veuillez saisir votre Login ! (5 caracteres mini");
+                string login = Console.ReadLine();
+
+                try
+                {
+                    VérifLogin(login, out loginCorrect);
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+
+                }
             }
 
 
             while (!mdpCorrect)
             {
-            Console.WriteLine("veuillez saisir votre mot de passe! (entre 6 et 12 caracteres et ne commence ni ne fini par un espace au premier et dernier) ");
-            string mdp = Console.ReadLine();
+                Console.WriteLine("veuillez saisir votre mot de passe! (entre 6 et 12 caracteres et ne commence ni ne fini par un espace au premier et dernier) ");
+                string mdp = Console.ReadLine();
 
                 try
                 {
@@ -42,27 +42,27 @@ namespace exercice_Login
                 }
                 catch (FormatException e)
                 {
-
+                    
                     Console.WriteLine(e.Message);
                 }
             }
-                Console.WriteLine("Votre compte a bien été créé. Un message vient de vous être envoyé");
-                Console.ReadKey();
+            Console.WriteLine("Votre compte a bien été créé. Un message vient de vous être envoyé");
+            Console.ReadKey();
 
 
         }
 
-        static void VérifLogin(string log,out bool loginCorrect )
+        static void VérifLogin(string log, out bool loginCorrect)
         {
-         if( log.Length < 5)
+            if (log.Length < 5)
             {
                 throw new FormatException("login trop petit!( min 5 caracteres!)");
             }
             loginCorrect = true;
 
-           
+
         }
-        
+
         static void VérifMdp(string mdp, out bool mdpCorrect)
         {
             if (mdp.Length < 6)
@@ -74,15 +74,15 @@ namespace exercice_Login
             {
                 throw new FormatException("mot de passe trop grand!( 12 caracteres maxi!)");
             }
-            if (mdp[0]==' ')
+            if (mdp[0] == ' ')
             {
                 throw new FormatException("mot de passe erroné!( pas d'espace au début svp!)");
             }
-            if (mdp[mdp.Length-1]==' ')
+            if (mdp[mdp.Length - 1] == ' ')
             {
                 throw new FormatException("mot de passe erroné!( pas d'espace à la fin svp!)");
             }
-            mdpCorrect = true;          
+            mdpCorrect = true;
         }
 
     }
