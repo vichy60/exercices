@@ -6,12 +6,20 @@ using System.Threading.Tasks;
 
 namespace boites
 {
+
+
+
     class Program
     {
         static void Main(string[] args)
         {
-        }
+            Boite b1 = new Boite();
+            //b1.Couleurs = TypeCouleurs.rouge;
+            Console.WriteLine("Boite de volume {0} cm3, de couleur {1} et en {2}",
+                b1.Volume, b1.Couleurs, b1.Matière);
 
+            Console.ReadKey();
+        }
         public enum TypeCouleurs
         {
             blanc,
@@ -42,13 +50,13 @@ namespace boites
             #endregion
 
             /// <summary>
-            /// initialisation (par un constructeur) des trois dimensions à 30.0
+            /// initialisation (par un constructeur) des trois dimensions à 30.0m(attention decimaledonc mettre m et .0)
             /// </summary>
             public Boite()
             {
-                _hauteur = 30;
-                _largeur = 30;
-                _longueur = 30;
+                _hauteur = 30.0m;
+                _largeur = 30.0m;
+                _longueur = 30.0m ;
                 _matière = TypeMatière.carton;
             }
 
