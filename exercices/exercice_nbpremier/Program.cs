@@ -20,7 +20,7 @@ namespace exercice_nbpremier
             int n; //nombre à trouver
             string saisie;
             int compt;
-            int chiffreTesté=2
+            int chiffreTesté = 2;
 
             compt = 1;
             saisie = Console.ReadLine();
@@ -43,7 +43,7 @@ namespace exercice_nbpremier
             }
             else
             {
-                n++
+                n++;
             }
         }
 
