@@ -38,7 +38,7 @@ namespace boites
         #endregion
 
         /// <summary>
-        /// initialisation (par un constructeur) des trois dimensions à 30.0m(attention decimaledonc mettre m et .0)
+        /// initialisation (par un constructeur) des trois dimensions à 30.0m(attention decimale donc mettre m et .0)
         /// </summary>
         public Boite()
         {

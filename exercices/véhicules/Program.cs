@@ -38,7 +38,10 @@ namespace véhicules
     }
        public class Voiture : Véhicule
         {
-            public Voiture(string nom, Energies energie) :base( nom, 4, energie)
+        public override string Description
+        { get { return string.Format("Je suis une voiture \r\n " + base.Description);}        }
+
+        public Voiture(string nom, Energies energie) :base( nom, 4, energie)
             {
                 
             }
@@ -53,6 +56,8 @@ namespace véhicules
         static void Main(string[] args)
         {
             Voiture voiture1 = new Voiture("Clio", Energies.Essence);
+            Console.WriteLine(voiture1.Description);
+            Console.ReadKey();
         }
     }
 }

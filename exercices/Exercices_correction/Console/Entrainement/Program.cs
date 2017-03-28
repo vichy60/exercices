@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Entrainement
 {
@@ -10,8 +11,52 @@ namespace Entrainement
 	{
 		static void Main(string[] args)
 		{
-			Demo();
-			Console.ReadKey();
+            try
+            {
+                AfficherSaisons();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("une erreur s'est produite");
+            }
+
+            // Attend l’appui d’une touche afin d’empêcher la console de se fermer 
+            Console.ReadKey();
+		}
+
+        static void AfficherSaisons()
+        {
+            try
+            {
+                for (int m = 0; m<4; m++)
+                    Console.WriteLine(NomSaison(m));
+            }
+            finally
+            {
+                Console.WriteLine("Au revoir");
+            }
+        }
+
+        public static string NomSaison(int saison)
+        {
+            switch (saison)
+            {
+                case 1:
+                    return "Printemps";
+                case 2:
+                    return "Eté";
+                case 3:
+                    return "Automne";
+                case 4:
+                    return "Hiver";
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        static void AfficherPersonne(string prénom, string nom)
+		{
+			Console.WriteLine("prénom : " + prénom + ", nom : " + nom);
 		}
 
 		static void Demo()
