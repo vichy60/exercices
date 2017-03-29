@@ -113,7 +113,7 @@ namespace boites
             _etiquetteDest = etqDest;
             _etiquetteFragile = etqFragile;
         }
-        _
+        
 
 
         public bool Compare(Boite autreboite)
