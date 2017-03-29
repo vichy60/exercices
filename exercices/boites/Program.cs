@@ -23,7 +23,7 @@ namespace boites
 
             Etiquette etqFragile = new Etiquette
             {
-                Couleur = TypeCouleurs.Rouge,
+                Couleur = TypeCouleurs.rouge,
                 Format = TypeFormat.S,
                 Texte = "FRAGILE"
             };
