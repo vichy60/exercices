@@ -16,10 +16,10 @@ namespace véhicules
         Electrique
     }
 
-    
 
 
-    public abstract  class Véhicule :IComparable
+
+    public abstract class Véhicule : IComparable
     {
         #region propriétés automatiques
         public string Nom { get; }
@@ -27,8 +27,8 @@ namespace véhicules
 
         public Energies Energie { get; }
 
-        public virtual string Description { get { return string.Format("Véhicule {0} roule sur {1} roues et à l'énergie {2}",Nom,NbRoues,Energie); } }
-          
+        public virtual string Description { get { return string.Format("Véhicule {0} roule sur {1} roues et à l'énergie {2}", Nom, NbRoues, Energie); } }
+
         public abstract double PRK { get; }
         #endregion
 
@@ -43,80 +43,107 @@ namespace véhicules
 
         public abstract void CalculerConso();
 
-        public int CompareTo(Object obj)
+        public int CompareTo(object obj)
         {
-            Véhicule v = (Véhicule)obj;
-
-        }
-    }
-       public class Voiture : Véhicule
-        {
-        public override string Description
-        { get { return string.Format("Je suis une voiture \r\n " + base.Description);}        }
-
-        public override double PRK
-        {
-            get
+            if (obj is Véhicule)
             {
-               return 10.5;
+                Véhicule v = (Véhicule)obj;
+                if (PRK < v.PRK) return -1;
+                else if (PRK > v.PRK) return 1;
+                else return 0;
+            }
+            else
+                throw new ArgumentException();
+        }
+        public class Voiture : Véhicule
+        {
+            public override string Description
+            { get { return string.Format("Je suis une voiture \r\n " + base.Description); } }
+
+            public override double PRK
+            {
+                get
+                {
+                    return 10.5;
+                }
+            }
+
+            public Voiture(string nom, Energies energie) : base(nom, 4, energie)
+            {
+
+            }
+
+            public override void CalculerConso()
+            {
+                throw new NotImplementedException();
             }
         }
-
-        public Voiture(string nom, Energies energie) :base( nom, 4, energie)
-            {
-                
-            }
-
-        public override void CalculerConso()
-        {
-            throw new NotImplementedException();
-        }
-    }
 
         #endregion
-    public class Moto : Véhicule
-    {
-        public Moto(string nom, int nbRoues, Energies energie) : base(nom, nbRoues, energie)
+        public class Moto : Véhicule
         {
-        }
-
-        public override string Description
-        {
-            get
+            public Moto(string nom, int nbRoues, Energies energie) : base(nom, nbRoues, energie)
             {
-                return string.Format("Je suis une Moto\r\n"+base.Description);
+            }
+
+            public override string Description
+            {
+                get
+                {
+                    return string.Format("Je suis une Moto\r\n" + base.Description);
+                }
+            }
+
+            public override double PRK
+            {
+                get
+                {
+                    return 0.4;
+                }
+            }
+
+            public override void CalculerConso()
+            {
+                throw new NotImplementedException();
             }
         }
-
-        public override double PRK
+        class Program
         {
-            get
+            static void Main(string[] args)
             {
-                return 0.4;
+                Voiture voiture1 = new Voiture("Clio", Energies.Essence);
+                Console.WriteLine(voiture1.Description);
+                //Véhicule Véhicule3 = new Véhicule();
+
+                Console.ReadKey();
+
+                Véhicule voiture2 = new Voiture("Peugeot", Energies.Gazole);
+                Console.WriteLine(voiture2.Description);
+                Véhicule moto2 = new Moto("Suzuki", 2, Energies.Essence);
+                Console.WriteLine(moto2.Description);
+                Console.ReadKey();
+
+
+                object o = new object();
+
+                try
+                {
+                    int res = voiture1.CompareTo(o);
+                    if (res < 0)
+                        Console.WriteLine("{0} est plus économique que {1}", voiture1.Nom, voiture2.Nom);
+                    else if (res > 0)
+                        Console.WriteLine("{0} est plus économique que {1}", voiture2.Nom, voiture1.Nom);
+                    else
+                        Console.WriteLine("{0} a le même PRK que {1}", voiture1.Nom, voiture2.Nom);
+                }
+                catch (ArgumentException)
+                {
+                    Console.WriteLine("Comparaison impossible");
+                }
+
+                Console.ReadKey();
+
             }
-        }
-
-        public override void CalculerConso()
-        {
-            throw new NotImplementedException();
-        }
-    }
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Voiture voiture1 = new Voiture("Clio", Energies.Essence);
-            Console.WriteLine(voiture1.Description);
-            //Véhicule Véhicule3 = new Véhicule();
-            
-                     Console.ReadKey();
-
-            Véhicule voiture2 = new Voiture("Peugeot",Energies.Gazole);
-            Console.WriteLine(voiture2.Description);
-            Véhicule moto2 = new Moto("Suzuki",2,Energies.Essence);
-            Console.WriteLine(moto2.Description);
-            Console.ReadKey();
-
         }
     }
 }
