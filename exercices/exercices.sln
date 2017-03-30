@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "véhicules", "véhicules\v�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testboites", "testboites\testboites.csproj", "{A2C8FEA0-393F-4AA0-86A0-24CEA0F92DAD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "statuts", "ConsoleApplication1\statuts.csproj", "{7572930F-5638-45AE-B046-EA05AF9F4FAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exercice_Florian", "exercice_Florian\exercice_Florian.csproj", "{CCAD0131-4884-4078-AB7A-438A03EB7351}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{A2C8FEA0-393F-4AA0-86A0-24CEA0F92DAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2C8FEA0-393F-4AA0-86A0-24CEA0F92DAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2C8FEA0-393F-4AA0-86A0-24CEA0F92DAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7572930F-5638-45AE-B046-EA05AF9F4FAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7572930F-5638-45AE-B046-EA05AF9F4FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7572930F-5638-45AE-B046-EA05AF9F4FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7572930F-5638-45AE-B046-EA05AF9F4FAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCAD0131-4884-4078-AB7A-438A03EB7351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCAD0131-4884-4078-AB7A-438A03EB7351}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCAD0131-4884-4078-AB7A-438A03EB7351}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCAD0131-4884-4078-AB7A-438A03EB7351}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
