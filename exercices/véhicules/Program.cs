@@ -90,7 +90,8 @@ namespace véhicules
             {
                 get
                 {
-                    return string.Format("Je suis une Moto\r\n" + base.Description);
+                    //return string.Format("Je suis une Moto\r\n" + base.Description);
+                    return ("Je suis une Moto\r\n" + base.Description);
                 }
             }
 
