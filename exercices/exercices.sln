@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "statuts", "ConsoleApplicati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exercice_Florian", "exercice_Florian\exercice_Florian.csproj", "{CCAD0131-4884-4078-AB7A-438A03EB7351}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeteoLinq", "MeteoLinq\MeteoLinq.csproj", "{B2DB9FDA-A711-4581-A360-EA68F2D25CF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{CCAD0131-4884-4078-AB7A-438A03EB7351}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCAD0131-4884-4078-AB7A-438A03EB7351}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCAD0131-4884-4078-AB7A-438A03EB7351}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2DB9FDA-A711-4581-A360-EA68F2D25CF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2DB9FDA-A711-4581-A360-EA68F2D25CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2DB9FDA-A711-4581-A360-EA68F2D25CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2DB9FDA-A711-4581-A360-EA68F2D25CF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
