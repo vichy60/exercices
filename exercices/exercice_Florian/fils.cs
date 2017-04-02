@@ -20,6 +20,13 @@ namespace exercice_Florian
             Description = "je suis un fils";
         }
         #endregion
+        #region methode publique
+        //public override bool Mangeable()
+        //{
+        //    return true;
+        //}
+
+        #endregion
     }
 
 

@@ -4,85 +4,76 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using statuts;
 
 namespace statuts
 {
 
-    public class Personne
-    {
-        #region propriétés automatiques
-        public string Nom { get; }
-        public string Prenom { get; }
-        public Statu Statut { get; }
-        #endregion
-        #region Constructeur
-        public Personne(string nom,string prenom,Statu statut)
-        {
-            Nom = nom;
-            Prenom = prenom;
-            Statut = statut;
-        }
-        #endregion
-        #region Méthodes
-        public override string ToString()
-        {
-            return base.ToString() + string.Format("{ 0}{ 1}{ 2}",Nom,Prenom,Statut);
-        }
-
-        #endregion
-
-    }
-
     [Flags]
-    public enum Statu
+    public enum Status
     {
-        Aucun=0,
-        CDI=1,
-        CDD=2,
-        DP=4,
-        CHSCT=8,
-        SYND=16
+        Aucun = 0,
+        CDI = 1,
+        CDD = 2,
+        DP = 4,
+        CHSCT = 8,
+        SYND = 16
+
     }
-    
-
-
     class Program
     {
         static void Main(string[] args)
         {
-            Statu statu1 = Statu.CDI;
-            Statu statu2 = Statu.CDD | Statu.DP;
-            Statu statu3 = Statu.CDI | Statu.DP | Statu.CHSCT | Statu.SYND;
-            Statu statu4 = Statu.CDD | Statu.CHSCT;
-            Statu statu5 = Statu.CDD;
-            Statu statu6 = Statu.CDI | Statu.DP | Statu.SYND;
-            Statu statu7 = Statu.CDI | Statu.SYND;
-            Statu statu8 = Statu.CDI | Statu.DP | Statu.CHSCT;
-        
+            List<Personne> list = new List<Personne> {new Personne("TURPIN","Abel",Status.CDI),
+                                                    new Personne("BONNEAU","Achille",Status.CDD|Status.DP),
+                                                    new Personne("BLONDEL","Adelphe",Status.CDI|Status.DP|Status.CHSCT|Status.SYND),
+                                                    new Personne("BLACK","Aimé",Status.CDI),
+                                                    new Personne("PERRIER","Aimée",Status.CDI),
+                                                    new Personne("JORDAN","Alain",Status.CDD|Status.CHSCT),
+                                                    new Personne("BAUDRY","Alban",Status.CDD),
+                                                    new Personne("ORLEANS","Albert",Status.CDI|Status.DP|Status.SYND),
+                                                    new Personne("VALOIS","Alexandra",Status.CDI|Status.SYND),
+                                                    new Personne("WEST","Alexandre",Status.CDI|Status.DP|Status.CHSCT)
+                                                    };
+
+            Status masque1 = Status.CDD | Status.CHSCT;
+            Status masque2 = Status.CDI | Status.DP;
+            List<Personne> listCddChsct = new List<Personne>();
+            List<Personne> listCdiDp = new List<Personne>();
+
+            foreach (var p in list)
+            {
+                if ((p.Statu & masque1) == masque1) { listCddChsct.Add(p); }
+
+                if ((p.Statu & masque2) == masque2)
+                {
+                    listCdiDp.Add(p);
+                }
+            }
+
+            foreach (var i in listCddChsct)
+            {
+                Console.WriteLine(i.ToString());
+            }
+            Console.WriteLine();
+            foreach (var i in listCdiDp)
+            {
+                Console.WriteLine(i.ToString());
+            }
+
+            foreach (var p in listCdiDp)
+            {
+                // p.Statu = p.Statu | Status.CHSCT;
+                p.Statu |= Status.CHSCT;
+                Console.WriteLine(p);
+            }
+
+            Console.ReadKey();
 
 
 
 
 
-
-
-            Personne p1 = new Personne("TURPIN", "Abel", statu1);
-            Personne p2 = new Personne("BONNEAU", "Achille", statu2);
-            Personne p3 = new Personne("BLONDEL", "Adelphe", statu3);
-            Personne p4 = new Personne("BLACK", "Aimé",statu1 );
-            Personne p5 = new Personne("PERRIER", "Aimée", statu1);
-            Personne p6 = new Personne("JORDAN", "Alain", statu4);
-            Personne p7 = new Personne("BAUDRY", "Alban", statu6);
-            Personne p8 = new Personne("ORLEANS", "Albert", statu7);
-            Personne p9 = new Personne("VALOIS", "Alexandra", statu8);
-            Personne p10 = new Personne("WEST", "Alexandre", statu9);
-
-
-
-
-
-            List<Personne> listPers = new List<Personne>();
-            listPers.Add(p3)
         }
     }
 }
