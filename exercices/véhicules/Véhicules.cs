@@ -44,7 +44,7 @@ namespace véhicules
             NbRoues = nbRoues;
             Energie = energie;
         }
-        public Véhicule( string nom2, int nbRoues2, Energies energie2, double prix) : this( nom2,nbRoues2,energie2)
+        public Véhicule( string nom, int nbRoues, Energies energie, double prix) : this( nom,nbRoues,energie)
         {
             Prix = prix;
         }
@@ -136,7 +136,7 @@ namespace véhicules
         }
         #region Constructeur
         
-        public Moto(double prix, string nom, int nbRoues, Energies energie) :base (prix, nom, nbRoues,energie )
+        public Moto(double prix, string nom, int nbRoues, Energies energie) :base ( nom, nbRoues,energie,prix )
         { 
 
         }
