@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Véhicules", "Véhicules\V�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{75BAD317-FCAC-4365-A48C-EAF3C1D99747}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqMétéo", "LinqMétéo\LinqMétéo.csproj", "{8726AB1E-C4AD-4CFE-9F1E-EA93789F4640}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{75BAD317-FCAC-4365-A48C-EAF3C1D99747}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75BAD317-FCAC-4365-A48C-EAF3C1D99747}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75BAD317-FCAC-4365-A48C-EAF3C1D99747}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8726AB1E-C4AD-4CFE-9F1E-EA93789F4640}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8726AB1E-C4AD-4CFE-9F1E-EA93789F4640}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8726AB1E-C4AD-4CFE-9F1E-EA93789F4640}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8726AB1E-C4AD-4CFE-9F1E-EA93789F4640}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
