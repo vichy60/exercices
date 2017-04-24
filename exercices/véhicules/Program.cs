@@ -39,18 +39,34 @@ namespace véhicules
                 Console.WriteLine("Comparaison impossible");
             }
 
-            Véhicule voiture4 = new Voiture( "Mégane",19000);
+            Véhicule voiture4 = new Voiture("Mégane", 19000);
             Véhicule voiture5 = new Voiture("Intruder", 13000);
-            Véhicule voiture6 = new Voiture("Enzo",  380000);
-            Véhicule voiture7 = new Voiture("Yamaha",  11000);
-           
+            Véhicule voiture6 = new Voiture("Enzo", 380000);
+            Véhicule voiture7 = new Voiture("Yamaha", 11000);
+
             var dic = new Dictionary<string, Véhicule>(); //Dictionary<string, Véhicule> dic = new Dictionary<string, Véhicule>();
             dic.Add(voiture4.Nom, voiture4);
             dic.Add(voiture5.Nom, voiture5);
             dic.Add(voiture6.Nom, voiture6);
             dic.Add(voiture7.Nom, voiture7);
             Console.ReadKey();
+        }
+        public static void ChangerPneus(Véhicule v)
+        {
+            var date = v.CarnetEntretien.Keys.Last();
+
+
+        }
+
+        public static void Vidanger(Véhicule v)
+        {
+
+        }
+
+        public static void RetoucherPeinture(Véhicule v)
+        {
 
         }
     }
+    
 }

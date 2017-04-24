@@ -15,6 +15,8 @@ namespace véhicules
         Electrique
     }
 
+    public delegate void DelegueEntretien(Véhicule v);
+
 
     public abstract class Véhicule : IComparable
     {
@@ -29,16 +31,22 @@ namespace véhicules
         public abstract double PRK { get; }
 
         public double Prix { get;}
+
+        public Dictionary<DateTime, string> CarnetEntretien { get; }
+
         #endregion
 
         #region Constructeur
-
-        public Véhicule(string nom,double prix)
+        public Véhicule()
+        {
+            var CarnetEntretien = new Dictionary<DateTime, string>();
+        }
+        public Véhicule(string nom,double prix): this()
         {
             Nom = nom;
             Prix = prix;
         }
-        public Véhicule(string nom, int nbRoues, Energies energie)
+        public Véhicule(string nom, int nbRoues, Energies energie):this()
         {
             Nom = nom;
             NbRoues = nbRoues;
@@ -51,6 +59,10 @@ namespace véhicules
 
 
         #endregion
+
+
+        #region Méthodes publiques
+
         public abstract void CalculerConso();
 
         //public int CompareTo(object obj)
@@ -80,6 +92,18 @@ namespace véhicules
             else
                 throw new ArgumentException();
         }
+
+        public void Entretenir(DateTime dateEntretien, DelegueEntretien entretienVéhicule )
+        {
+            CarnetEntretien.Add(dateEntretien,string.Empty);
+            entretienVéhicule(this);
+           
+            
+        }
+
+        #endregion
+
+
     }
     public class Voiture : Véhicule
     {
@@ -94,6 +118,14 @@ namespace véhicules
             }
         }
 
+        #region Constructeur
+
+       
+        public Voiture()
+        {
+
+        }
+
         public Voiture(string nom, Energies energie) : base(nom, 4, energie)
         {
 
@@ -103,10 +135,15 @@ namespace véhicules
         {
 
         }
+        #endregion
+
+        #region Méthodes publiques
+
         public override void CalculerConso()
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 
 
@@ -136,7 +173,7 @@ namespace véhicules
         }
         #region Constructeur
         
-        public Moto(double prix, string nom, int nbRoues, Energies energie) :base (prix, nom, nbRoues,energie )
+        public Moto(double prix, string nom, int nbRoues, Energies energie) :base ( nom, nbRoues,energie, prix)
         { 
 
         }
