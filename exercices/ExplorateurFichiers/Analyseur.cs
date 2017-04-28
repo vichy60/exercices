@@ -30,7 +30,15 @@ namespace ExplorateurFichiers
         #region Méthodes publiques
         public void AnalyserDossier(string chemin)
 
+            
         {
+            
+
+            listFichierProjet.Clear();
+
+
+
+
             DelegueExplorateur délégué = null;
 
             délégué += CompterFichiers;
@@ -44,7 +52,7 @@ namespace ExplorateurFichiers
 
         public void CompterFichiers(FileInfo file1)
         {
-            if (file1.Extension == ".cs")
+            if (file1.Extension.ToLower() == ".cs")
             {
                 fichierCs++;
             }
@@ -62,7 +70,7 @@ namespace ExplorateurFichiers
         }
         public void FiltrerProjet(FileInfo file1)
         {
-            if (file1.Extension == ".csproj")
+            if (file1.Extension.ToLower() == ".csproj")
             { 
                 listFichierProjet.Add(file1.Name);
             }
