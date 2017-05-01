@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,6 +16,7 @@ namespace ADO
 		[STAThread]
 		static void Main()
 		{
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr");
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 

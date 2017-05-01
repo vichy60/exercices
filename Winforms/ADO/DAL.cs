@@ -221,7 +221,7 @@ namespace ADO
             var listProd = new BindingList<Produit>();
 
             var connectString = Properties.Settings.Default.NorthwindConnectionString;
-            string queryString = @"select ProductID,ProductName,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,SupplierID from Products";
+            string queryString = @"select ProductID,ProductName,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,SupplierID from Products where Discontinued=0";
 
 
 
@@ -365,28 +365,23 @@ namespace ADO
         }
 
 
-        public static void SuppEnMasse(List<int> listId)
+        public static void SuppEnMasse(List<Produit> listId)
         {
 
             // Ecriture de la requête d'insertion en masse
             // Le paramètre @table contiendra les enregistrements à insérer
             string req = @"update Products set Discontinued=1 
                            from @table t 
-                            inner join Products p on t.Id = p.ProductID";
+                            inner join Products p on t.ID = p.ProductID";
 
-//where ProductID=t.Id;
+            //where ProductID=t.Id;
 
             // Création du paramètre de type table mémoire
-            // /!\ Le type TypeTableProduit doit être créé au préalable dans la base
+            // /!\ Le type TypeTabId doit être créé au préalable dans la base
             /*
-            create type TypeTableProduit as table
+            create type TypeTabId as table
               (
-              ProductName nvarchar(40),
-              CategoryID int,
-              QuantityPerUnit nvarchar(20),
-              UnitPrice money,
-              UnitsInStock smallint,
-              SupplierID int
+              ID int
               )
 
               */
@@ -428,7 +423,7 @@ namespace ADO
 
 
 
-        private static DataTable GetDataTableForProd2(List<int> list)
+        private static DataTable GetDataTableForProd2(List<Produit> list)
         {
             // Créaton d'une table mémoire
             DataTable table = new DataTable();
@@ -437,30 +432,6 @@ namespace ADO
             var colId = new DataColumn("ID", typeof(int));
             colId.AllowDBNull = false;
             table.Columns.Add(colId);
-
-            //var colCatId = new DataColumn("CategoryID", typeof(int));
-            //colCatId.AllowDBNull = false;
-            //table.Columns.Add(colCatId);
-
-            //var colQtU = new DataColumn("QuantityPerUnit", typeof(string));
-            //colQtU.AllowDBNull = false;
-            //table.Columns.Add(colQtU);
-
-            //var colPrix = new DataColumn("UnitPrice", typeof(int));
-            //colPrix.AllowDBNull = false;
-            //table.Columns.Add(colPrix);
-
-            //var colUnitenStock = new DataColumn("UnitsInStock", typeof(string));
-            //colUnitenStock.AllowDBNull = false;
-            //table.Columns.Add(colUnitenStock);
-
-            //var colFour = new DataColumn("SupplierID", typeof(int));
-            //colFour.AllowDBNull = false;
-            //table.Columns.Add(colFour);
-
-            // Pour les colonnes nullables, on peut utiliser une syntaxe plus courte
-            // car AllowDBNull à la valeur True par défaut
-            //table.Columns.Add(new DataColumn("Titre", typeof(string)));
 
             /* Si la colonne de clé primaire n'est pas auto-incrémentée,
             on peut définir une contrainte de clé primaire sur la table
@@ -474,13 +445,8 @@ namespace ADO
                 // Création d'une ligne de table
                 DataRow ligne = table.NewRow();
 
-                ligne["ID"] = p;
-                //ligne["CategoryID"] = p.Catégorie;
-                //ligne["QuantityPerUnit"] = p.QtUnit;
-                //ligne["UnitPrice"] = p.PrixUnit;
-                //ligne["UnitsInStock"] = p.Unit;
-                //ligne["SupplierID"] = p.FournisseurId;
-
+                ligne["ID"] = p.Id ;
+               
 
 
                 // Pour une colonne nullable dans la base,

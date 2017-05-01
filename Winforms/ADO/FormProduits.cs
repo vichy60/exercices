@@ -29,7 +29,8 @@ namespace ADO
         private void BtRecord_Click(object sender, EventArgs e)
 
         {
-            DAL. (_produitsAjoutés);
+            DAL.SuppEnMasse(_produitsSupprimé);
+            DAL.AjouEnMasse(_produitsAjoutés);
             _list = DAL.GetProd();
 
             dgvProduits.DataSource = _list;
@@ -40,8 +41,9 @@ namespace ADO
         {
             //todo mettre ici le try catch (le produit sélectionné est référencé par une ligne de commande)
             //if (DAL.SupProd((Produit)dgvProduits.CurrentRow.DataBoundItem)) -------mis en commentaire pour faire l'exercice 4.1
-            _list.Remove(   (Produit)dgvProduits.CurrentRow.DataBoundItem);
             _produitsSupprimé.Add((Produit)dgvProduits.CurrentRow.DataBoundItem);
+            _list.Remove((Produit)dgvProduits.CurrentRow.DataBoundItem);
+
 
 
 
@@ -64,6 +66,7 @@ namespace ADO
 
         protected override void OnLoad(EventArgs e)
         {
+            _produitsSupprimé = new List<Produit>();       
             _produitsAjoutés = new List<Produit>();
             _list = DAL.GetProd();
 
