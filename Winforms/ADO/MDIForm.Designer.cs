@@ -31,8 +31,10 @@
             this.menuGeneral = new System.Windows.Forms.MenuStrip();
             this.AffichageContenuTables = new System.Windows.Forms.ToolStripMenuItem();
             this.menu2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuWindows = new System.Windows.Forms.ToolStripMenuItem();
             this.produits = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuWindows = new System.Windows.Forms.ToolStripMenuItem();
+            this.listeCommandeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.détailCommandesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuGeneral.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,9 +59,18 @@
             // 
             // menu2
             // 
+            this.menu2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listeCommandeToolStripMenuItem,
+            this.détailCommandesToolStripMenuItem});
             this.menu2.Name = "menu2";
             this.menu2.Size = new System.Drawing.Size(138, 20);
             this.menu2.Text = "AffichageCommandes";
+            // 
+            // produits
+            // 
+            this.produits.Name = "produits";
+            this.produits.Size = new System.Drawing.Size(63, 20);
+            this.produits.Text = "Produits";
             // 
             // menuWindows
             // 
@@ -67,11 +78,17 @@
             this.menuWindows.Size = new System.Drawing.Size(63, 20);
             this.menuWindows.Text = "Fenêtres";
             // 
-            // produits
+            // listeCommandeToolStripMenuItem
             // 
-            this.produits.Name = "produits";
-            this.produits.Size = new System.Drawing.Size(63, 20);
-            this.produits.Text = "Produits";
+            this.listeCommandeToolStripMenuItem.Name = "listeCommandeToolStripMenuItem";
+            this.listeCommandeToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.listeCommandeToolStripMenuItem.Text = "liste commandes";
+            // 
+            // détailCommandesToolStripMenuItem
+            // 
+            this.détailCommandesToolStripMenuItem.Name = "détailCommandesToolStripMenuItem";
+            this.détailCommandesToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.détailCommandesToolStripMenuItem.Text = "détail commandes";
             // 
             // MDIForm
             // 
@@ -97,6 +114,8 @@
 		private System.Windows.Forms.ToolStripMenuItem menuWindows;
 		private System.Windows.Forms.ToolStripMenuItem menu2;
         private System.Windows.Forms.ToolStripMenuItem produits;
+        private System.Windows.Forms.ToolStripMenuItem listeCommandeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem détailCommandesToolStripMenuItem;
     }
 }
 

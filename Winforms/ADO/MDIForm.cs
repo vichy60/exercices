@@ -16,7 +16,8 @@ namespace ADO
 
 			// TODO : branchez ici l'ouverture des fenêtres filles sur le clic des menus
 			AffichageContenuTables.Click += (object sender, EventArgs e) => ShowChild("ADO.FormFournisseurs");/*Le gestionnaire d'évènement est une expression lambda ici!!!!!'*/
-            menu2.Click += (object sender, EventArgs e) => ShowChild("ADO.FormCommandes");/*Le gestionnaire d'évènement est une expression lambda ici!!!!!'*/
+            listeCommandeToolStripMenuItem.Click  += (object sender, EventArgs e) => ShowChild("ADO.FormCommandes");/*Le gestionnaire d'évènement est une expression lambda ici!!!!!'*/
+            détailCommandesToolStripMenuItem.Click+= (object sender, EventArgs e) => ShowChild("ADO.FormListeCommandes");
             produits.Click += (object sender, EventArgs e) => ShowChild("ADO.FormProduits");/*Le gestionnaire d'évènement est une expression lambda ici!!!!!'*/
 
         }

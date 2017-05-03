@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace ADO
 {
@@ -364,8 +368,11 @@ namespace ADO
             return supOk;
         }
 
+        //***********************************************************************************************************
+        /*Suppression de masse dans la table products (met 1 dans le champ discounted pour rendre le produit obsolète)
+         /***********************************************************************************************************/
 
-        public static void SuppEnMasse(List<int> listId)
+        public static void SuppEnMasse(IEnumerable<int> listId)
         {
 
             // Ecriture de la requête d'insertion en masse
@@ -373,23 +380,6 @@ namespace ADO
             string req = @"update Products set Discontinued=1 
                            from @table t 
                             inner join Products p on t.Id = p.ProductID";
-
-//where ProductID=t.Id;
-
-            // Création du paramètre de type table mémoire
-            // /!\ Le type TypeTableProduit doit être créé au préalable dans la base
-            /*
-            create type TypeTableProduit as table
-              (
-              ProductName nvarchar(40),
-              CategoryID int,
-              QuantityPerUnit nvarchar(20),
-              UnitPrice money,
-              UnitsInStock smallint,
-              SupplierID int
-              )
-
-              */
 
             var param = new SqlParameter("@table", SqlDbType.Structured);
             DataTable tableProd = GetDataTableForProd2(listId);
@@ -425,10 +415,7 @@ namespace ADO
 
 
 
-
-
-
-        private static DataTable GetDataTableForProd2(List<int> list)
+        private static DataTable GetDataTableForProd2(IEnumerable<int> list)
         {
             // Créaton d'une table mémoire
             DataTable table = new DataTable();
@@ -438,35 +425,6 @@ namespace ADO
             colId.AllowDBNull = false;
             table.Columns.Add(colId);
 
-            //var colCatId = new DataColumn("CategoryID", typeof(int));
-            //colCatId.AllowDBNull = false;
-            //table.Columns.Add(colCatId);
-
-            //var colQtU = new DataColumn("QuantityPerUnit", typeof(string));
-            //colQtU.AllowDBNull = false;
-            //table.Columns.Add(colQtU);
-
-            //var colPrix = new DataColumn("UnitPrice", typeof(int));
-            //colPrix.AllowDBNull = false;
-            //table.Columns.Add(colPrix);
-
-            //var colUnitenStock = new DataColumn("UnitsInStock", typeof(string));
-            //colUnitenStock.AllowDBNull = false;
-            //table.Columns.Add(colUnitenStock);
-
-            //var colFour = new DataColumn("SupplierID", typeof(int));
-            //colFour.AllowDBNull = false;
-            //table.Columns.Add(colFour);
-
-            // Pour les colonnes nullables, on peut utiliser une syntaxe plus courte
-            // car AllowDBNull à la valeur True par défaut
-            //table.Columns.Add(new DataColumn("Titre", typeof(string)));
-
-            /* Si la colonne de clé primaire n'est pas auto-incrémentée,
-            on peut définir une contrainte de clé primaire sur la table
-            Ceci affecte automatiquement Unique = True et AllowDBNull = False
-            sur la ou les colonne(s) définie(s) comme clé */
-            //table.PrimaryKey = new DataColumn[] { col1, col2 };
 
             // Chargement de la liste des personnes dans la table mémoire
             foreach (var p in list)
@@ -475,31 +433,7 @@ namespace ADO
                 DataRow ligne = table.NewRow();
 
                 ligne["ID"] = p;
-                //ligne["CategoryID"] = p.Catégorie;
-                //ligne["QuantityPerUnit"] = p.QtUnit;
-                //ligne["UnitPrice"] = p.PrixUnit;
-                //ligne["UnitsInStock"] = p.Unit;
-                //ligne["SupplierID"] = p.FournisseurId;
 
-
-
-                // Pour une colonne nullable dans la base,
-                // il faut affecter la valeur DBNull à la place de null
-                //if (p.Catégorie != null)
-                //    ligne["CategoryID"] = p.Catégorie;
-                //else ligne["CategoryID"] = DBNull.Value;
-                //if (p.QtUnit != null)
-                //    ligne["QuantityPerUnit"] = p.QtUnit;
-                //else ligne["QuantityPerUnit"] = DBNull.Value;
-                //if (p.PrixUnit != null)
-                //    ligne["UnitPrice"] = p.PrixUnit;
-                //else ligne["UnitPrice"] = DBNull.Value;
-                //if (p.Unit != null)
-                //    ligne["UnitsInStock"] = p.Unit;
-                //else ligne["UnitsInStock"] = DBNull.Value;
-                //if (p.FournisseurId != null)
-                //    ligne["SupplierID"] = p.FournisseurId;
-                //else ligne["SupplierID"] = DBNull.Value;
 
                 // Ajout de la ligne dans la table
                 table.Rows.Add(ligne);
@@ -697,80 +631,259 @@ namespace ADO
             return table;
         }
 
+        public static List<Commande> GetComDétail()
+        {
+            // Liste de Commande pour stocker le résultat de la requête
+            var listCom = new List<Commande>();
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///// <summary>
-        ///// Suppression de masse par mise à 1 du champ discounted de la table Products
-        ///// </summary>
-        ///// <param name="listId"></param>
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //public static void SuppEnMasse(List<int> listId)
+            var connectString = Properties.Settings.Default.NorthwindConnectionString;
+            string queryString = @"select o.OrderID,o.CustomerID,o.OrderDate,od.ProductID,od.UnitPrice,od.Quantity,
+                                    od.Discount from Orders o inner join Order_Details as od on o.OrderID=od.OrderID";
+
+
+            using (var connect = new SqlConnection(connectString))
+            {
+                var command = new SqlCommand(queryString, connect);
+
+                connect.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        GetListCommandeFromDataReader(listCom, reader);
+                    }
+                }
+            }
+
+            return listCom;
+
+
+
+
+
+        }
+
+        private static void GetListCommandeFromDataReader(List<Commande> listCom, SqlDataReader reader)
+        {
+            int comId = (int)reader["OrderID"];
+
+            if (listCom.Count == 0 || listCom[listCom.Count - 1].CommandeId != comId)
+            {
+                Commande com = new Commande() { listLigneCom = new List<LigneCommande>() };
+
+
+                com.CommandeId = (int)reader["OrderID"];
+                if (reader["CustomerID"] != DBNull.Value)
+                    com.CustomerID = reader["CustomerID"].ToString();
+                if (reader["OrderDate"] != DBNull.Value)
+                    com.DateCommande = (DateTime)reader["OrderDate"];
+
+                listCom.Add(com);
+            }
+
+            LigneCommande liCom = new LigneCommande();
+
+            liCom.ProductId = (int)reader["ProductID"];
+            liCom.UnitPrice = (decimal)reader["UnitPrice"];
+
+            liCom.Quantity = (short)reader["Quantity"];
+
+            liCom.Discount = (float)reader["Discount"];
+
+
+
+
+            listCom[listCom.Count - 1].listLigneCom.Add(liCom);
+
+        }
+
+        /////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        //////////////////////////Sérialisation
+        /// </summary>
+        /// <param name="listCom"></param>
+        //Exportation des données dans un fichier XML à l'aide d'un sérializer
+        /////////////////////////////////////////////////////////////////////////
+        public static void ExportDonneeVersXml(List<Commande> listCom)
+        {
+
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Commande>),
+                                       new XmlRootAttribute("Clients"));
+
+            using (var sw = new StreamWriter(@"D:\ycappelle\winforms\ListCommande_serializer.xml"))
+            {
+                serializer.Serialize(sw, listCom);
+            }
+
+
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////Déserialisation
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        public static List<Commande> ImporterXml()
+        {
+            List<Commande> listCom = null;
+
+            XmlSerializer deserializer = new XmlSerializer(typeof(List<Commande>),
+               new XmlRootAttribute("Clients"));
+
+            using (var sr = new StreamReader(@"D:\ycappelle\winforms\ListCommande_serializer.xml"))
+            {
+                // Deserialize renvoie un type object, qu'il faut transtyper 
+                listCom = (List<Commande>)deserializer.Deserialize(sr);
+            }
+
+            return listCom;
+        }
+
+
+
+
+
+        /// <summary>
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////
+        /// </summary>
+        /// <param name="listCom"></param>
+        // la structure de nos classes ne correspond pas vraiment au résultat demandé donc on va utiliser 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        public static void ExporterXml_XmlWriter(List<Commande> listCom)
+        {
+            // Définit les paramètres pour l'indentation du flux xml généré
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.IndentChars = "\t";
+
+            // Utilisation d'un XmlWriter avec les paramètres définis précédemment
+            // pour écrire un fichier CollectionsBD_Writer.xml
+            using (XmlWriter writer = XmlWriter.Create(@"D:\ycappelle\winforms\ListCommande_writer.xml",
+                                          settings))
+            {
+                // Ecriture du prologue
+                writer.WriteStartDocument();
+
+                // Ecriture de l'élément racine
+                writer.WriteStartElement("DatesCommandes");
+
+                // Ecriture du contenu interne, avec une structure différente
+                // de celle de la collection d'objets passée en paramètre
+
+                List<Commande> listTriée = listCom.OrderBy(d => d.DateCommande).ToList();
+                DateTime dateCourante = DateTime.MinValue;
+                foreach (Commande com in listTriée)
+                {
+
+                    // todo gerer la creation des balises XML en fonction de l'annee et du mois
+                    //todo requete LINQ sur commande pour calcul du montant total de la commande
+
+                    //gerer premiere fois et changement mois et annee
+
+                    if (com.DateCommande.Year != dateCourante.Year || com.DateCommande.Month != dateCourante.Month)
+                    {
+                        if (dateCourante != DateTime.MinValue)  //spécifique au premier enregistrement (puis ensuite on doit fermer la balise précédee
+                        {
+                            writer.WriteEndElement();
+                        }
+                        writer.WriteStartElement("DatesCommande");
+                        writer.WriteAttributeString("annee", (com.DateCommande.Year).ToString());
+                        writer.WriteAttributeString("mois", com.DateCommande.Month.ToString());
+                    }
+                    writer.WriteStartElement("Commande");
+                    writer.WriteAttributeString("CommandeId", com.CommandeId.ToString());
+                    //todo
+                    writer.WriteAttributeString("Montant", (com.listLigneCom.Sum(d => ((double)(d.Quantity * d.UnitPrice)) * (1 - d.Discount)).ToString()));
+                    writer.WriteEndElement();
+                    dateCourante = com.DateCommande;
+
+
+
+                }
+                writer.WriteEndElement();
+
+
+                // Ecriture de la balise fermante de l'élément racine et fin du document
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+            }
+        }
+
+
+
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        //5.5	Désérialisation avec Linq To XML
+        /////////////////////////////////////////////////////////////////////////////////////////////
+
+        public static List<Commande> ImporterXmlLinq()
+
+        {
+            List<Commande> listCom = new List<Commande>() ;
+            // Chargement du fichier xml 
+            XDocument doc = XDocument.Load(@"D:\ycappelle\winforms\ListCommande_serializer.xml");
+
+
+            var com = doc.Descendants("Commande");
+            foreach (XElement c in com)
+            {
+                var cde = new Commande() { listLigneCom = new List<LigneCommande>() };
+                
+
+                cde.CommandeId = int.Parse(c.Attribute("CommandeId").Value);
+                cde.DateCommande = DateTime.Parse(c.Attribute("DateCommande").Value);
+                cde.DateLivraion = DateTime.Parse(c.Attribute("DateLivraion").Value);
+                cde.NbProduitsCom = int.Parse(c.Attribute("NbProduitsCom").Value);
+                cde.MontantCom = int.Parse(c.Attribute("MontantCom").Value);
+                cde.Frais = int.Parse(c.Attribute("Frais").Value);
+                cde.CustomerID = (c.Attribute("CustomerID").Value);
+
+                var lignCom = c.Descendants("LigneCommande");
+                foreach (XElement ligne in lignCom)
+                {
+                    var li = new LigneCommande();
+
+                    li.ProductId = int.Parse(ligne.Attribute("ProductId").Value);
+                    li.UnitPrice = decimal.Parse(ligne.Attribute("UnitPrice").Value.Replace('.',','));
+                    li.Quantity = short.Parse(ligne.Attribute("Quantity").Value);
+                    li.Discount = float.Parse(ligne.Attribute("Discount").Value.Replace('.', ','));
+
+                    cde.listLigneCom.Add(li);
+
+                }
+
+
+                listCom.Add(cde);
+            }
+            
+
+            return listCom;
+        }
         //{
+        //    List<Commande> listCom = null;
 
-        //    // Ecriture de la requête d'insertion en masse
-        //    // Le paramètre @table contiendra les enregistrements à insérer
-        //    string req = @"update Products set Discontinued=1 
-        //                   from @table t 
-        //                    inner join Products p on t.Id = p.ProductID";
+        //    XmlSerializer deserializer = new XmlSerializer(typeof(List<Commande>),
+        //       new XmlRootAttribute("Clients"));
 
-
-
-        //    var param = new SqlParameter("@table", SqlDbType.Structured);
-        //    DataTable tableProd = GetDataTableForProd(listId);
-        //    param.TypeName = "TypeTabId";
-        //    param.Value = tableProd;
-
-        //    using (var cnx = new SqlConnection(Properties.Settings.Default.NorthwindConnectionString))
+        //    using (var sr = new StreamReader(@"D:\ycappelle\winforms\ListCommande_serializer.xml"))
         //    {
-        //        // Ouverture de la connexion et début de la transaction
-        //        cnx.Open();
-        //        SqlTransaction tran = cnx.BeginTransaction();
-
-        //        try
-        //        {
-        //            // Création et exécution de la commande
-        //            var command = new SqlCommand(req, cnx, tran);
-        //            command.Parameters.Add(param);
-        //            command.ExecuteNonQuery();
-
-        //            // Validation de la transaction s'il n'y a pas eu d'erreur
-        //            tran.Commit();
-        //        }
-        //        catch (Exception)
-        //        {
-        //            tran.Rollback(); // Annulation de la transaction en cas d'erreur
-        //            throw;   // Remontée de l'erreur à l'appelant
-        //        }
+        //        // Deserialize renvoie un type object, qu'il faut transtyper 
+        //        listCom = (List<Commande>)deserializer.Deserialize(sr);
         //    }
+
+        //    return listCom;
         //}
 
 
-        //private static DataTable GetDataTableForProd(List<int> list)
-        //{
-        //    // Créaton d'une table mémoire
-        //    DataTable table = new DataTable();
 
-        //    // Création des colonnes NomProduit ,CategorieID,QteUnit,Prix,UniteStock et Fournisseur et ajout à la table
-        //    var colId = new DataColumn("ID", typeof(int));
-        //    colId.AllowDBNull = false;
-        //    table.Columns.Add(colId);
 
-        //    // Chargement de la liste des personnes dans la table mémoire
-        //    foreach (var p in list)
-        //    {
-        //        // Création d'une ligne de table
-        //        DataRow ligne = table.NewRow();
 
-        //        ligne["ID"] = p;
 
-        //        table.Rows.Add(ligne);
-        //    }
-
-        //    return table;
-        //}
 
     }
 }
+
 
 
 

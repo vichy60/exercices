@@ -1,0 +1,1 @@
+﻿select o.OrderID,o.CustomerID,o.OrderDate,od.ProductID,od.UnitPrice,od.Quantity,od.Discount from orders o inner join Order_Details as od on o.OrderID=od.OrderID

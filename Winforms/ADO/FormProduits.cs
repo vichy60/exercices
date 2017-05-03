@@ -29,10 +29,12 @@ namespace ADO
         private void BtRecord_Click(object sender, EventArgs e)
 
         {
-            DAL. (_produitsAjoutés);
+            DAL.AjouEnMasse(_produitsAjoutés);
+            DAL.SuppEnMasse(_produitsSupprimé.Select(p => p.Id));
             _list = DAL.GetProd();
 
             dgvProduits.DataSource = _list;
+
 
         }
 
@@ -42,6 +44,7 @@ namespace ADO
             //if (DAL.SupProd((Produit)dgvProduits.CurrentRow.DataBoundItem)) -------mis en commentaire pour faire l'exercice 4.1
             _list.Remove(   (Produit)dgvProduits.CurrentRow.DataBoundItem);
             _produitsSupprimé.Add((Produit)dgvProduits.CurrentRow.DataBoundItem);
+            
 
 
 
@@ -68,6 +71,7 @@ namespace ADO
             _list = DAL.GetProd();
 
             dgvProduits.DataSource = _list;
+            _produitsSupprimé = new List<Produit>();
 
             base.OnLoad(e);
         }

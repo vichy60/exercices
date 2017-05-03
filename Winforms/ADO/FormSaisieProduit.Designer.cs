@@ -104,7 +104,7 @@
             this.tbNom.MaxLength = 40;
             this.tbNom.Name = "tbNom";
             this.tbNom.Size = new System.Drawing.Size(353, 20);
-            this.tbNom.TabIndex = 6;
+            this.tbNom.TabIndex = 1;
             // 
             // mtbCat
             // 
@@ -112,7 +112,7 @@
             this.mtbCat.Mask = "999";
             this.mtbCat.Name = "mtbCat";
             this.mtbCat.Size = new System.Drawing.Size(100, 20);
-            this.mtbCat.TabIndex = 7;
+            this.mtbCat.TabIndex = 2;
             // 
             // mtbPrixU
             // 
@@ -120,21 +120,21 @@
             this.mtbPrixU.Mask = "99.99";
             this.mtbPrixU.Name = "mtbPrixU";
             this.mtbPrixU.Size = new System.Drawing.Size(100, 20);
-            this.mtbPrixU.TabIndex = 9;
+            this.mtbPrixU.TabIndex = 4;
             // 
             // mtbUnitStock
             // 
             this.mtbUnitStock.Location = new System.Drawing.Point(120, 165);
             this.mtbUnitStock.Name = "mtbUnitStock";
             this.mtbUnitStock.Size = new System.Drawing.Size(100, 20);
-            this.mtbUnitStock.TabIndex = 10;
+            this.mtbUnitStock.TabIndex = 5;
             // 
             // mtbFourn
             // 
             this.mtbFourn.Location = new System.Drawing.Point(120, 200);
             this.mtbFourn.Name = "mtbFourn";
             this.mtbFourn.Size = new System.Drawing.Size(100, 20);
-            this.mtbFourn.TabIndex = 11;
+            this.mtbFourn.TabIndex = 6;
             // 
             // btOK
             // 
@@ -143,7 +143,7 @@
             this.btOK.Location = new System.Drawing.Point(289, 245);
             this.btOK.Name = "btOK";
             this.btOK.Size = new System.Drawing.Size(75, 23);
-            this.btOK.TabIndex = 12;
+            this.btOK.TabIndex = 7;
             this.btOK.Text = "OK";
             this.btOK.UseVisualStyleBackColor = true;
             // 
@@ -154,7 +154,7 @@
             this.btAnnuler.Location = new System.Drawing.Point(426, 245);
             this.btAnnuler.Name = "btAnnuler";
             this.btAnnuler.Size = new System.Drawing.Size(75, 23);
-            this.btAnnuler.TabIndex = 13;
+            this.btAnnuler.TabIndex = 8;
             this.btAnnuler.Text = "Annuler";
             this.btAnnuler.UseVisualStyleBackColor = true;
             // 
@@ -163,7 +163,7 @@
             this.tbQtU.Location = new System.Drawing.Point(123, 97);
             this.tbQtU.Name = "tbQtU";
             this.tbQtU.Size = new System.Drawing.Size(100, 20);
-            this.tbQtU.TabIndex = 14;
+            this.tbQtU.TabIndex = 3;
             // 
             // FormSaisieProduit
             // 
