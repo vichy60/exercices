@@ -23,6 +23,7 @@ namespace Saisie_de_taches
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new Contexte();
         }
     }
 }
