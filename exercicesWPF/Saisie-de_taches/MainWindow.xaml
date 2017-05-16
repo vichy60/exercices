@@ -20,10 +20,10 @@
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top" Margin="5">
                         <StackPanel Orientation="Horizontal">
-                            <Button  Content="+" />
-                            <Button   Content="&#x2212;" />
-                            <Button  Content="&#x2713;" />
-                            <Button  Content="&#x21b6;" />
+                            <Button  Content="+" Command="{Binding CmdAjouter}"/>
+                            <Button   Content="&#x2212;" Command="{Binding CmdASupprimer}" />
+                            <Button  Content="&#x2713;" Command="{Binding CmdEnregistrer}" />
+                                <Button  Content="&#x21b6;" Command="{Binding CmdAnnuler}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" >
                             <Label Content="Tâche N°"/>
@@ -44,13 +44,13 @@
                 </DockPanel>
             </Expander>
             <Label DockPanel.Dock="Top" Content="Liste des tâches" />
-            <ListView >
+            <ListView ItemsSource="{Binding Path=Employes}" DisplayMemberPath="Id" IsSynchronizedWithCurrentItem="True">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Id" Width="25"/>
-                        <GridViewColumn Header="Echéance" Width="80"/>
-                        <GridViewColumn Header="Priorité" Width=""/>
-                        <GridViewColumn Header="Fait"/>
+                        <GridViewColumn Header="Id" Width="25" DisplayMemberBinding="{Binding Path=Id}"/>
+                        <GridViewColumn Header="Echéance" Width="80" DisplayMemberBinding="{Binding Path=Term}"/>
+                        <GridViewColumn Header="Priorité" Width="80" DisplayMemberBinding="{Binding Path=Prio}"/>
+                        <GridViewColumn Header="Fait" Width="30" DisplayMemberBinding="{Binding Path=Fait}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
