@@ -1,0 +1,28 @@
+﻿<Application x:Class="Fenetre_de_parametrage.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Fenetre_de_parametrage"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+        <Style x:Key="StyleLabel1">
+            <Setter Property="Label.Background" Value="LightGray"/>
+            <Setter Property="Label.Margin" Value="-10,2,0,2"/>
+            <Setter Property="Label.FontWeight" Value="Bold"/>
+        </Style>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DicoImages.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+
+
+    </Application.Resources>
+   
+
+
+
+
+
+</Application>

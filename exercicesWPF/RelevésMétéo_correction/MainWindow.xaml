@@ -1,0 +1,182 @@
+﻿<Window x:Class="RelevésMétéo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		  xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:RelevésMétéo"
+        mc:Ignorable="d"
+        Title="Relevés météo"
+		  Height="700" Width="500">
+	<Window.Resources>
+		<!-- Convertisseurs -->
+		<local:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
+		<local:DoubleToColorBrushConverter x:Key="DoubleToColorBrushConv"/>
+		<sys:Double x:Key="SeuilPrécipitations">10</sys:Double>
+		
+		<!-- Template pour les vignettes -->
+		<DataTemplate x:Key="TemplateVignette">
+			<DataTemplate.Resources>
+				<Style TargetType="TextBlock">
+					<Setter Property="FontSize" Value="16"/>
+				</Style>
+			</DataTemplate.Resources>
+			<Border BorderThickness="1" BorderBrush="Blue">
+				<Grid Background="{Binding Path=Précipitations,
+						Converter={StaticResource DoubleToColorBrushConv},
+						ConverterParameter={StaticResource SeuilPrécipitations}}">
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.RowSpan="2"
+								Text="{Binding Path=Date, StringFormat='MM/yyyy'}"/>
+					<TextBlock Grid.Column="1"
+									Text="{Binding Path=TMax, StringFormat='&#x23F6; {0} °C'}"/>
+					<TextBlock Grid.Row="1" Grid.Column="1"
+									Text="{Binding Path=TMin, StringFormat='&#x23F7; {0} °C'}"/>
+					<TextBlock Grid.Column="2"
+									Text="{Binding Path=Précipitations, StringFormat='&#x1F4A7; {0} mm'}"/>
+					<TextBlock Grid.Row="1" Grid.Column="2"
+									Text="{Binding Path=Ensoleillement, StringFormat='&#x263C; {0} h'}"/>
+				</Grid>
+			</Border>
+		</DataTemplate>
+
+		<!-- Template pour les lignes simples -->
+		<DataTemplate x:Key="TemplateLigneSimple">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<TextBlock Text="{Binding Path=Date, StringFormat='MMMM'}" Grid.Column="0"/>
+				<TextBlock Text="{Binding Path=TMin, StringFormat='Minimale : {0} °C'}" Grid.Column="1"/>
+				<TextBlock Text="{Binding Path=TMax, StringFormat='Maximale : {0} °C'}" Grid.Column="2"/>
+			</Grid>
+		</DataTemplate>
+
+		<!-- Template pour les en-têtes de groupes -->
+		<DataTemplate x:Key="TemplateEnteteGroupe">
+			<TextBlock Background="LightSteelBlue" FontWeight="Bold" Padding="3">
+            <TextBlock Text="{Binding Path=Name}"/>
+         </TextBlock>
+		</DataTemplate>
+	</Window.Resources>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="35"/>
+			<RowDefinition Height="35"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="120"/>
+		</Grid.RowDefinitions>
+
+		<!-- Ligne 0 : Sélection du fichier -->
+		<DockPanel Margin="0,5">
+			<Button Content="..." DockPanel.Dock="Right" Width="50"
+					  Click="BtnOuvrirFichier_Click"/>
+			<TextBox Name="tbxChemin" IsReadOnly="True"
+						Text="Sélectionnez le fichier de relevés météo..."/>
+		</DockPanel>
+
+		<!-- Ligne 1 : Sélection de la vue -->
+		<Grid Grid.Row="1" Margin="5">
+			<!-- SelectionChanged="cmb_SelectionChanged"> -->
+			<!-- Au départ, cet evt est remplacé par ceux des 3 combobox -->
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+
+			<StackPanel Orientation="Horizontal">
+				<Label Content="Vue"/>
+				<ComboBox Name="cmbVue" MinWidth="150" SelectedValuePath="Tag"
+					SelectionChanged="cmbVue_SelectionChanged">
+					<!-- Au départ, à mettre à la place de l'evt placé sur la grille -->
+					<ComboBoxItem Name="itemVignettes" Tag="TemplateVignette" Content="Vignettes" IsSelected="True"/>
+					<ComboBoxItem Name="itemGroupes" Tag="TemplateLigneSimple" Content="Groupée par année"/>
+				</ComboBox>
+			</StackPanel>
+
+			<StackPanel Grid.Column="2" Orientation="Horizontal">
+			<Label Content="Trier par"/>
+				<ComboBox Name="cmbTri" MinWidth="140" SelectedValuePath="Tag"
+					SelectionChanged="cmbTri_SelectionChanged">
+					<!-- Au départ, à mettre à la place de l'evt placé sur la grille -->
+					<ComboBoxItem Tag="Mois" Content="Mois" IsSelected="True"/>
+					<ComboBoxItem Tag="TMin" Content="T° min"/>
+					<ComboBoxItem Tag="TMax" Content="T° max"/>
+					<ComboBoxItem Tag="Précipitations" Content="Précipitations"/>
+					<ComboBoxItem Tag="Ensoleillement" Content="Durée ensoleillement"/>
+				</ComboBox>
+				<ComboBox Name="cmbOrdre"
+					SelectionChanged="cmbTri_SelectionChanged">
+					<!-- Au départ, à mettre à la place de l'evt placé sur la grille -->
+					<ComboBoxItem Content="&#x23F6;" IsSelected="True"/>
+					<ComboBoxItem Content="&#x23F7;"/>
+				</ComboBox>
+			</StackPanel>
+		</Grid>
+
+		<!-- Ligne 2 : Liste -->
+		<ListBox Name="lstRelevés" Grid.Row="2" HorizontalContentAlignment="Stretch"
+					ItemsSource="{Binding Path=Data}" ItemTemplate="{StaticResource TemplateVignette}"
+					IsSynchronizedWithCurrentItem="True">
+			<ListBox.GroupStyle>
+				<GroupStyle HeaderTemplate="{StaticResource TemplateEnteteGroupe}"/>
+			</ListBox.GroupStyle>
+		</ListBox>
+
+		<!-- Ligne 3:  Détail ou infos de synthèse -->
+		<ContentControl Grid.Row="3" Margin="10"
+							 Visibility="{Binding ElementName=itemGroupes, Path=IsSelected, 
+								Converter={StaticResource BoolToVisibilityConv}}"
+							 Content="{Binding Path=Data}" ContentTemplate="{StaticResource TemplateVignette}"/>
+
+		<Grid Name="grdInfosSynthese" Grid.Row="3" Margin="5"
+				Visibility="{Binding ElementName=itemVignettes, Path=IsSelected, 
+								Converter={StaticResource BoolToVisibilityConv}}">
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			
+			<Label Content="Mois le plus froid"/>
+			<StackPanel Grid.Row="1" Orientation="Horizontal">
+				<TextBlock Text="{Binding Path=Stats.MoisPlusFroid, StringFormat=MM/yyyy}"/>
+				<TextBlock Text="{Binding Path=Stats.TMin, StringFormat=' : {0} °C'}"/>
+			</StackPanel>
+			
+			<Label Grid.Row="2" Content="Mois le plus chaud"/>
+			<StackPanel Grid.Row="3" Orientation="Horizontal">
+				<TextBlock Text="{Binding Path=Stats.MoisPlusChaud, StringFormat=MM/yyyy}"/>
+				<TextBlock Text="{Binding Path=Stats.TMax, StringFormat=' : {0} °C'}"/>
+			</StackPanel>
+
+			<Label Grid.Column="1" Content="Année la plus sèche"/>
+			<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+				<TextBlock Text="{Binding Path=Stats.AnnéePlusSèche}"/>
+				<TextBlock Text="{Binding Path=Stats.PrécipitationsMin, StringFormat=' : {0} mm'}"/>
+			</StackPanel>
+
+			<Label Grid.Row="2" Grid.Column="1" Content="Année la plus humide"/>
+			<StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+				<TextBlock Text="{Binding Path=Stats.AnnéePlusHumide}"/>
+				<TextBlock Text="{Binding Path=Stats.PrécipitationsMax, StringFormat=' : {0} mm'}"/>
+			</StackPanel>
+		</Grid>
+	</Grid>
+</Window>

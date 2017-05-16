@@ -1,0 +1,57 @@
+﻿<Window x:Class="Entrainement.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Entrainement"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="240" Width="525">
+    
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
+        <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>-->
+        <Button  Content="Annuler" FontSize="16" Width="100" Height="30" Margin="5
+                 " />
+        <Button Content="OK"
+                Width="100" Height="30" Margin="5 "/>
+        <!--<Button  
+                 FontSize="20" Content="WPF c'est super!" Padding="10"
+                 HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0"
+                 HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"/>-->
+            
+
+    </StackPanel>
+    <!--
+    <StackPanel Orientation="Horizontal" Background="#295">
+        
+        --><!-- Création de 4 lignes --><!--
+        <Grid.RowDefinitions>
+            <RowDefinition  />
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        --><!-- Création de 2 colonnes --><!--
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>  --><!--équivalent à Width="175"--><!--
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        --><!-- Ligne 0 --><!--
+        <Label Content="Nom" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" Margin="10" Height="30" VerticalContentAlignment="Center" Text="Toto"/>
+        --><!-- Ligne 1 --><!--
+        <Label Content="Prénom" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="10" Height="30" />
+        --><!-- Ligne 2 --><!--
+        <Label Content="Date de naissance" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <DatePicker Grid.Row="2" Grid.Column="1" Margin="10" Height="30" VerticalContentAlignment="Center"/>
+        --><!-- Ligne 3 --><!--
+        <Button Content="Valider" Grid.Row="3"  Margin="10" Height="30" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
+
+
+
+    </StackPanel>-->
+</Window>

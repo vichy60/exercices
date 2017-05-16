@@ -1,0 +1,25 @@
+﻿<Window x:Class="liaison_avec_autre_élément_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:liaison_avec_autre_élément_WPF"
+        mc:Ignorable="d"
+        Title="{Binding ElementName=tb_1, Path=Text}" Height="500" Width="350" Name="fenetre">
+    <DockPanel >
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <Label Content="Titre de la fenetre"/>
+            <TextBox Name="tb_1" Text="Liaison avec autre fenetre"/>
+        </StackPanel>
+    
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <Label Content="Dimensions de la fenetre"/>
+            <TextBox Name="tb_larg" Text="{Binding ElementName=fenetre, Path=Width}" Width="40"/>
+            <Label Content="X"/>
+
+            <TextBox Name="tb_haut"   Text="{Binding ElementName=fenetre, Path=Height}" Width="40"/>
+        </StackPanel>
+       
+
+    </DockPanel>
+</Window>

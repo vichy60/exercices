@@ -1,0 +1,100 @@
+﻿<Window x:Class="Fenetre_de_parametrage.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Fenetre_de_parametrage"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="700">
+    <DockPanel>
+        <StackPanel HorizontalAlignment="Right" DockPanel.Dock="Bottom"  Orientation="Horizontal">
+
+            <Button  Content="OK" Width="90" Height="25" Margin="0,5,15,5"/>
+            <Button  Content="Annuler" Width="90" Height="25"/>
+        </StackPanel>
+        <TabControl TabStripPlacement="Left" >
+            <TabItem Header="Général" Padding="30,0,30,0">
+                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+                    <StackPanel>
+
+                        <Grid Margin="15,0,15,0">
+                            <!-- Création de 4 lignes -->
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition Height="3*"/>
+
+
+                            </Grid.RowDefinitions>
+                            <!-- Création de 2 colonnes -->
+                            <Grid.ColumnDefinitions>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal">
+                                <StaticResource ResourceKey="imageUsers"/>
+                                <!--<Image Grid.Row="0" Source="Image/Users.png"  HorizontalAlignment="Left"  Width="40" Height="40" Margin="10"/>-->
+                                <Label Content="Options générales d'utilisation de Word" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                            <Label Grid.Row="1" Style="{StaticResource StyleLabel1}" Content="Options d'Interface utilisateur"/>
+                            <StackPanel Grid.Row="2" >
+                                <CheckBox Content="Afficher la mini barre d'outils lors de la sélection"  IsChecked="True"/>
+                                <CheckBox Content="Activer l'aperçu instantané"  IsChecked="False"/>
+                                <CheckBox Content="Mettre à jour le contenu des documents pendant leur déplacement"  IsChecked="False"/>
+                                <DockPanel Margin="0,0,50,0"  >
+                                    <Label Content="Style d'info-bulle:"/>
+                                    <ComboBox  DockPanel.Dock="Right" SelectedIndex="0" Margin="0,5,0,5">
+                                        <ComboBoxItem Content="Afficher les descriptions des fonctionnalités dans des info-bulles" />
+                                    </ComboBox>
+                                </DockPanel>
+                            </StackPanel>
+                            <Label Grid.Row="3" Style="{StaticResource StyleLabel1}" Content="Personnaliser votre suite de programmes Microsoft Office" />
+                            <StackPanel Grid.Row="4" Orientation="Horizontal">
+                                <Label MinWidth="120" Content="Nom d'utilisateur :"/>
+                                <TextBox Text="Yannick CAPPELLE" VerticalContentAlignment="Center" Width="200" Margin="15,2,2,0"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="5" Orientation="Horizontal">
+                                <Label MinWidth="120" Content="Initiales :"/>
+                                <TextBox Text="YC" VerticalContentAlignment="Center" Width="50" Margin="15,2,2,0"/>
+                            </StackPanel>
+                            <CheckBox Grid.Row="6" IsChecked="false" Content="Toujours utiliser ces valeurs , quel que soit l'état de connexion à Office"/>
+                            <StackPanel Grid.Row="7" Orientation="Horizontal">
+                                <Label MinWidth="120" Content="Arrière-plan Office:"/>
+                                <ComboBox   Width="150"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="8" Orientation="Horizontal">
+                                <Label MinWidth="120" Content="Thème Office:"/>
+                                <ComboBox  Width="100"/>
+                            </StackPanel>
+                            <Label Grid.Row="9" Style="{StaticResource StyleLabel1}" Content="Options de démarrage" />
+                            <StackPanel Grid.Row="10" Orientation="Horizontal" >
+                                <Label Content="Choisir les extensions que Word doit toujours ouvrir:"/>
+                                <Button  Width="250" Content="Programmes que vous souhaitez utiliser..."/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="11" >
+                                <CheckBox Content="Me prévenir si Word n'est pas toujours utilisé pour l'affichage et la modification des documents"  IsChecked="False"/>
+                                <CheckBox Content="Ouvrir les pièces jointes et autres fichiers non modifiables en mode plein écran"  IsChecked="False"/>
+                                <CheckBox Content="Afficher l'écran de démarrage au lancement de l'application"  IsChecked="False"/>
+
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Affichage"></TabItem>
+            <StackPanel>
+
+            </StackPanel>
+            <TabItem Header="Vérification"></TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>
