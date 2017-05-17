@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Trombinoscope
+namespace Trombinoscope2
 {
     public class Personne
     {

@@ -27,7 +27,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" >
                             <Label Content="Tâche N°"/>
-                            <TextBlock Text="3" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Path=Taches/Id}" VerticalAlignment="Center"/>
                             <Label Content="   crée le 17/01/2017"/>
                         </StackPanel>
                         <Label Content="Echéance"/>
@@ -36,7 +36,7 @@
                             <CheckBox DockPanel.Dock="Right" IsChecked="True" Background="LightGray" Content="fait" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                             <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
                                 <Label Content="Priorité"/>
-                                <TextBox Text="2" VerticalContentAlignment="Center" Padding="4,0"/>
+                                <TextBox Text="{Binding Path=Taches/Prio}" VerticalContentAlignment="Center" Padding="4,0"   />
                             </StackPanel>
                         </DockPanel>
                     </StackPanel>
@@ -44,13 +44,14 @@
                 </DockPanel>
             </Expander>
             <Label DockPanel.Dock="Top" Content="Liste des tâches" />
-            <ListView ItemsSource="{Binding Path=Employes}" DisplayMemberPath="Id" IsSynchronizedWithCurrentItem="True">
+            <ListView ItemsSource="{Binding Path=Taches}" DisplayMemberPath="Id" IsSynchronizedWithCurrentItem="True">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Id" Width="25" DisplayMemberBinding="{Binding Path=Id}"/>
                         <GridViewColumn Header="Echéance" Width="80" DisplayMemberBinding="{Binding Path=Term}"/>
                         <GridViewColumn Header="Priorité" Width="80" DisplayMemberBinding="{Binding Path=Prio}"/>
                         <GridViewColumn Header="Fait" Width="30" DisplayMemberBinding="{Binding Path=Fait}"/>
+                        <GridViewColumn Header="Commentaires" Width="272" DisplayMemberBinding="{Binding Path=Description}"/>
                     </GridView>
                 </ListView.View>
             </ListView>

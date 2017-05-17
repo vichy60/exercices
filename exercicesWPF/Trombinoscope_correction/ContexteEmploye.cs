@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Data;
 using System.Windows.Input;
 
-namespace Trombinoscope
+namespace Trombinoscope2
 {
 	public class ContexteEmploye : INotifyPropertyChanged
 	{

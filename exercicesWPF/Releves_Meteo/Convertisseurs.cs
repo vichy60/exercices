@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -57,4 +58,40 @@ namespace Releves_Meteo
         }
     }
 
+    public class VueToTemplateConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            //string res = null;
+
+            //if ((string)value == "Vignettes")
+            //    res = "Template_vignette";
+            //else
+            //    res = "Template_groupe";
+
+            //return res;
+
+            return (string)value == "Vignettes" ? "Template_vignette" : "Template_groupe";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class DebugDummyConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            Debugger.Break();
+            return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            Debugger.Break();
+            return value;
+        }
+    }
 }

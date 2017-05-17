@@ -1,0 +1,79 @@
+﻿<Window x:Class="Collections_de_bandes_dessinées.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Collections_de_bandes_dessinées"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <local:NomToImageConverter x:Key="NomToImageConverter"/>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        </Style>
+    </Window.Resources>
+
+
+
+    <Grid>
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
+                <ToolBar>
+                    <Border>
+                        <Button  Content="|&#x25C4;"  Command="{Binding CmdFirst}" CommandParameter="F"/>
+                    </Border>
+                    <Border>
+                        <Button  Content="&#x25C4;" Command="{Binding CmdFirst}" CommandParameter="P"/>
+                    </Border>
+                    <Border>
+                        <Button  Content="&#x25BA;" Command="{Binding CmdFirst}" CommandParameter="N"/>
+                    </Border>
+                    <Border>
+                        <Button  Content="&#x25BA;|" Command="{Binding CmdFirst}" CommandParameter="L"/>
+                    </Border>
+
+                </ToolBar>
+            </StackPanel>
+            <DockPanel DockPanel.Dock="Top" >
+                <TextBlock DockPanel.Dock="Right" Text=" albums" FontWeight="Bold"/>
+                <TextBlock DockPanel.Dock="Right" Text="{Binding Albums.Count }" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Path=Nom}" Foreground="blue" FontSize="18" HorizontalAlignment="Center"/>
+            </DockPanel>
+            <Grid DockPanel.Dock="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image  Grid.RowSpan="2"  Name="imCollection" Source="{Binding Path=Nom,Converter={StaticResource NomToImageConverter}}" Height="100" />
+                <Label Grid.Column="2"  Content="Auteurs" FontWeight="Bold"/>
+                <ListBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=CollectionBD/Auteurs}" DisplayMemberPath="Nom"/>
+                <Label Grid.Column="1"  Content="Genres" FontWeight="Bold"/>
+                <ListBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Path=CollectionBD/Genres}" DisplayMemberPath="Libelle"/>
+            </Grid>
+
+            <ListView ItemsSource="{Binding Path=CollectionBD/Albums}" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="N°" DisplayMemberBinding="{Binding Path=Id}"/>
+                        <GridViewColumn Header="Année" DisplayMemberBinding="{Binding Path=Titre}"/>
+                        <GridViewColumn Header="Titre" DisplayMemberBinding="{Binding Path=Année}"/>
+                    </GridView>
+                </ListView.View>
+        </ListView>
+
+        </DockPanel>
+
+
+    </Grid>
+</Window>

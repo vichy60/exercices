@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Controls;
 
-namespace Trombinoscope
+namespace Trombinoscope2
 {
 	/// <summary>
 	/// Logique d'interaction pour UCCombos.xaml

@@ -9,6 +9,8 @@
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
         <local:PrécipitationMinToColorConverter x:Key="PrécipitationMinToColorConverter"/>
+        <local:VueToTemplateConverter x:Key="VueToTemplateConverter"/>
+        <local:DebugDummyConverter x:Key="DebugDummyConverter"/>
         <sys:Double x:Key="PrécipitationSeuil">10</sys:Double>
         <DataTemplate x:Key="Template_vignette">
             <Border BorderBrush="Blue" BorderThickness="1">
@@ -86,13 +88,37 @@
                 <ComboBoxItem Content="Groupée par année"/>
             </ComboBox>
         </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right">
+            <Label Content="Trier par:"/>
+            <ComboBox Name="cbTri" SelectedValuePath="Tag">
+                <ComboBoxItem Tag="Mois" Content="Mois" IsSelected="True"/>
+                <ComboBoxItem Tag="TMin" Content="T° min"/>
+                <ComboBoxItem Tag="TMax" Content="T° max"/>
+                <ComboBoxItem Tag="Précipitations" Content="Précipitations"/>
+                <ComboBoxItem Tag="Ensoleillement" Content="Ensoleillement"/>
+            </ComboBox>
+            <ComboBox Name="cbTriSens">
+                <ComboBoxItem Content="&#x25b2;" IsSelected="True"/>
+                <ComboBoxItem Content=" &#x25bc;"/>
+            </ComboBox>
+        </StackPanel>
 
         <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-        <ScrollViewer Grid.Row="2" Grid.ColumnSpan="2" >
-            <ListBox Name="lb_Données" ItemsSource="{Binding Path=Data}" HorizontalContentAlignment="Stretch"
-                     ItemTemplate="{StaticResource Template_vignette}" IsSynchronizedWithCurrentItem="True">
-            </ListBox>
-        </ScrollViewer >
+        <ListBox Name="lb_Données" ItemsSource="{Binding Path=Data}" HorizontalContentAlignment="Stretch"
+                     ItemTemplate="{StaticResource Template_vignette}" IsSynchronizedWithCurrentItem="True"
+                     Grid.Row="2" Grid.ColumnSpan="2" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <ListBox.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Background="LightSteelBlue" FontWeight="Bold" Padding="3" Text="{Binding Path=Name}">
+                            </TextBlock>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListBox.GroupStyle>
+
+        </ListBox>
         <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 
         <Grid Name="gdStatsVignette"  Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="2" 

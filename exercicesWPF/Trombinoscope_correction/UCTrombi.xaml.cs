@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 
 
-namespace Trombinoscope
+namespace Trombinoscope2
 {
 	/// <summary>
 	/// Logique d'interaction pour UCTrombi.xaml

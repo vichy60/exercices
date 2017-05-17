@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entrainement", "Entrainemen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "explorateur_fichier", "explorateur_fichier\explorateur_fichier.csproj", "{D233DFE4-A1CB-4033-8753-26B39BFD7132}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trombinoscope", "Trombinoscope\Trombinoscope.csproj", "{4116C57F-F891-4976-BA80-A677F6C0DA7C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fenetre_de_parametrage", "Fenetre_de_parametrage\Fenetre_de_parametrage.csproj", "{E81B5154-C407-4C25-B599-340D4765D88E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "liaison_avec_autre élément_WPF", "liaison_avec_autre élément_WPF\liaison_avec_autre élément_WPF.csproj", "{21542A90-7F6C-4F52-B8B4-9637CA29E8C0}"
@@ -17,9 +15,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Releves_Meteo", "Releves_Me
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RelevésMétéo_correction", "RelevésMétéo_correction\RelevésMétéo_correction.csproj", "{BC023C2A-C162-4E57-B516-643CE93FA246}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trombinoscope_correction", "Trombinoscope_correction\Trombinoscope_correction.csproj", "{3DEBAD33-F9F1-4359-8024-548EE9714633}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saisie-de_taches", "Saisie-de_taches\Saisie-de_taches.csproj", "{BC01F4A3-5E5A-4DA3-BF01-777DF2776E6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchiMVVM", "ArchiMVVM\ArchiMVVM.csproj", "{4778860A-13EE-412F-A3B1-18653A450ACC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trombinoscope_MVVM", "Trombinoscope_MVVM\Trombinoscope_MVVM.csproj", "{AD9A2499-D3B4-44E6-9EF9-B12ABD144CD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collections de bandes dessinées", "Collections de bandes dessinées\Collections de bandes dessinées.csproj", "{63C87688-1105-4EBD-A720-CFE560410AC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RelevesMeteo", "RelevesMeteo_Irène\RelevesMeteo.csproj", "{58FF3E33-BB42-419A-80B4-F09A0BCA86C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +39,6 @@ Global
 		{D233DFE4-A1CB-4033-8753-26B39BFD7132}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D233DFE4-A1CB-4033-8753-26B39BFD7132}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D233DFE4-A1CB-4033-8753-26B39BFD7132}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4116C57F-F891-4976-BA80-A677F6C0DA7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4116C57F-F891-4976-BA80-A677F6C0DA7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4116C57F-F891-4976-BA80-A677F6C0DA7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4116C57F-F891-4976-BA80-A677F6C0DA7C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E81B5154-C407-4C25-B599-340D4765D88E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E81B5154-C407-4C25-B599-340D4765D88E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E81B5154-C407-4C25-B599-340D4765D88E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,14 +55,26 @@ Global
 		{BC023C2A-C162-4E57-B516-643CE93FA246}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC023C2A-C162-4E57-B516-643CE93FA246}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC023C2A-C162-4E57-B516-643CE93FA246}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3DEBAD33-F9F1-4359-8024-548EE9714633}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3DEBAD33-F9F1-4359-8024-548EE9714633}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3DEBAD33-F9F1-4359-8024-548EE9714633}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3DEBAD33-F9F1-4359-8024-548EE9714633}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BC01F4A3-5E5A-4DA3-BF01-777DF2776E6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BC01F4A3-5E5A-4DA3-BF01-777DF2776E6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC01F4A3-5E5A-4DA3-BF01-777DF2776E6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC01F4A3-5E5A-4DA3-BF01-777DF2776E6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4778860A-13EE-412F-A3B1-18653A450ACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4778860A-13EE-412F-A3B1-18653A450ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4778860A-13EE-412F-A3B1-18653A450ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4778860A-13EE-412F-A3B1-18653A450ACC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD9A2499-D3B4-44E6-9EF9-B12ABD144CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD9A2499-D3B4-44E6-9EF9-B12ABD144CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD9A2499-D3B4-44E6-9EF9-B12ABD144CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD9A2499-D3B4-44E6-9EF9-B12ABD144CD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63C87688-1105-4EBD-A720-CFE560410AC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63C87688-1105-4EBD-A720-CFE560410AC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63C87688-1105-4EBD-A720-CFE560410AC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63C87688-1105-4EBD-A720-CFE560410AC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58FF3E33-BB42-419A-80B4-F09A0BCA86C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58FF3E33-BB42-419A-80B4-F09A0BCA86C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58FF3E33-BB42-419A-80B4-F09A0BCA86C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58FF3E33-BB42-419A-80B4-F09A0BCA86C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,7 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Trombinoscope
+namespace Trombinoscope2
 {
     public class DAL
     {

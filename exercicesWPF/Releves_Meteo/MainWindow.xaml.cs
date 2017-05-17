@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,20 +25,37 @@ namespace Releves_Meteo
 
         #region variables privées
         private DALMeteo _dalMeteo;
-        
+
         #endregion
         public MainWindow()
         {
             InitializeComponent();
+            Language = System.Windows.Markup.XmlLanguage.GetLanguage(System.Threading.Thread.CurrentThread.CurrentCulture.Name);
             _dalMeteo = new DALMeteo();
-
             bt_path.Click += Bt_path_Click;
-
             cbVue.SelectionChanged += CbVue_SelectionChanged;
+            cbTri.SelectionChanged += CbTri_SelectionChanged;
+        }
+
+        private void CbTri_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Applique le tri à la collection d'achats
+            //ICollectionView view = CollectionViewSource.GetDefaultView(_dalMeteo.Data);
+            //view.SortDescriptions.Clear();
+            //var sens = cbTriSens.SelectedIndex == 0 ? ListSortDirection.Ascending :
+            //                                          ListSortDirection.Descending;
+            //var tri = new SortDescription(cbTri.SelectedValue.ToString(), sens);
+            //view.SortDescriptions.Add(tri);
+            this.Tri();
+
         }
 
         private void CbVue_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //ICollectionView view = CollectionViewSource.GetDefaultView(_dalMeteo.Data);
+            //view.SortDescriptions.Clear();
+            //view.GroupDescriptions.Clear();
+
             //if (cbVue.SelectedValue.ToString() == "Vignettes")
             //{
             //    lb_Données.ItemTemplate = (DataTemplate)this.Resources["Template_vignette"];
@@ -46,10 +64,14 @@ namespace Releves_Meteo
             //}
             //else
             //{
+            //    view.SortDescriptions.Add(new SortDescription("Date", ListSortDirection.Ascending));
+
+            //    view.GroupDescriptions.Add(new PropertyGroupDescription("Année"));
             //    lb_Données.ItemTemplate = (DataTemplate)this.Resources["Template_groupe"];
             //    gdStatsVignette.Visibility = Visibility.Hidden;
             //    gdStatsGroupe.Visibility = Visibility.Visible;
             //}
+            this.Tri();
         }
 
         private void Bt_path_Click(object sender, RoutedEventArgs e)
@@ -71,6 +93,36 @@ namespace Releves_Meteo
                     MessageBox.Show("Impossible de charger le fichier!!!!");
                 }
             }
+        }
+        private void Tri()
+        {
+            ICollectionView view = CollectionViewSource.GetDefaultView(_dalMeteo.Data);
+            view.SortDescriptions.Clear();
+            view.GroupDescriptions.Clear();
+            var sens = cbTriSens.SelectedIndex == 0 ? ListSortDirection.Ascending :
+                                                  ListSortDirection.Descending;
+            var tri = new SortDescription(cbTri.SelectedValue.ToString(), sens);
+            view.SortDescriptions.Add(tri);
+
+            if (cbVue.SelectedValue.ToString() == "Vignettes")
+            {
+                lb_Données.ItemTemplate = (DataTemplate)this.Resources["Template_vignette"];
+                gdStatsVignette.Visibility = Visibility.Visible;
+                gdStatsGroupe.Visibility = Visibility.Hidden;
+
+
+            }
+            else
+            {
+                view.SortDescriptions.Add(new SortDescription("Date", ListSortDirection.Ascending));
+
+                view.GroupDescriptions.Add(new PropertyGroupDescription("Année"));
+                lb_Données.ItemTemplate = (DataTemplate)this.Resources["Template_groupe"];
+                gdStatsVignette.Visibility = Visibility.Hidden;
+                gdStatsGroupe.Visibility = Visibility.Visible;
+
+            }
+
         }
     }
 }

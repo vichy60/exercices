@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Trombinoscope.Properties {
+namespace Trombinoscope2.Properties {
     using System;
     
     
