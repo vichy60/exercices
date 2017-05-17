@@ -1,16 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Saisie_de_taches
 {
+
+    public enum ModesEdition { Consultation, Edition}
     public class Contexte
     {
         #region Propriétés
         public List<Tache> Taches { get; private set; }
+        public ModesEdition ModeEdit { get; set; }
+
+        
         #endregion
 
         #region Constructeurs
@@ -80,7 +88,11 @@ namespace Saisie_de_taches
         }
         private void SupprimerTache(object operateur)
         {
+ 
+            var tach = (Tache)CollectionViewSource.GetDefaultView(Taches).CurrentItem;
+            Taches.Remove(tach);
         }
+    
         private void EnregistrerTache(object operateur)
         {
         }
