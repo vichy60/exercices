@@ -7,16 +7,25 @@ using System.Windows.Input;
 
 namespace Saisie_de_taches
 {
-    public class Contexte
+    public enum ModesEdition { Consultation, Edition}
+    public class Contexte : ViewModelBase
     {
+        private ModesEdition _modeEdit;
         #region Propriétés
         public List<Tache> Taches { get; private set; }
+
+        public ModesEdition ModeEdit
+        {
+            get { return _modeEdit; }
+            set { SetProperty(ref _modeEdit, value); }
+        }
+
         #endregion
 
         #region Constructeurs
         public Contexte()
         {
-            Taches = AccesDonnees.ChargerTaches();
+            Taches = AccesDonnees.ChargerTaches(); 
         }
         #endregion
 
@@ -28,11 +37,13 @@ namespace Saisie_de_taches
             get
             {
                 if (_cmdAjouter == null)
-                    _cmdAjouter = new RelayCommand(AjouterTache);
+                    _cmdAjouter = new RelayCommand(AjouterTache,ActiverBouton);
 
                 return _cmdAjouter;
             }
         }
+
+
         /////// Commande Supprimer//////////////////////////////////////////
         private ICommand _cmdSupprimer;
         public ICommand CmdSupprimer
@@ -40,7 +51,7 @@ namespace Saisie_de_taches
             get
             {
                 if (_cmdSupprimer == null)
-                    _cmdSupprimer = new RelayCommand(SupprimerTache);
+                    _cmdSupprimer = new RelayCommand(SupprimerTache, ActiverBouton);
 
                 return _cmdSupprimer;
             }
@@ -52,7 +63,7 @@ namespace Saisie_de_taches
             get
             {
                 if (_cmdEnregistrer == null)
-                    _cmdEnregistrer = new RelayCommand(EnregistrerTache);
+                    _cmdEnregistrer = new RelayCommand(EnregistrerTache, DesactiverBouton);
 
                 return _cmdEnregistrer;
             }
@@ -64,7 +75,7 @@ namespace Saisie_de_taches
             get
             {
                 if (_cmdAnnuler == null)
-                    _cmdAnnuler = new RelayCommand(AnnulerTache);
+                    _cmdAnnuler = new RelayCommand(AnnulerTache, DesactiverBouton);
 
                 return _cmdAnnuler;
             }
@@ -77,15 +88,27 @@ namespace Saisie_de_taches
 
         private void AjouterTache(object operateur)
         {
+            ModeEdit = ModesEdition.Edition;
         }
         private void SupprimerTache(object operateur)
         {
+            ModeEdit = ModesEdition.Edition;
         }
         private void EnregistrerTache(object operateur)
         {
+            ModeEdit = ModesEdition.Consultation;
         }
         private void AnnulerTache(object operateur)
         {
+            ModeEdit = ModesEdition.Consultation;
+        }
+        private bool ActiverBouton(object obj)
+        {
+            return ModeEdit == ModesEdition.Consultation;
+        }
+        private bool DesactiverBouton(object obj)
+        {
+            return ModeEdit == ModesEdition.Edition;
         }
         #endregion
     }

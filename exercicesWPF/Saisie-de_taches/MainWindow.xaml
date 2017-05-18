@@ -12,6 +12,8 @@
             <Setter Property="Width" Value="40"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
+        <local:ConvModeEditLectureSeule x:Key="ConvModeEditLectureSeule"/>
+        <local:ConvModeEditActivation x:Key="ConvModeEditActivation"/>
     </Window.Resources>
 
     <Grid>
@@ -21,26 +23,30 @@
                     <StackPanel DockPanel.Dock="Top" Margin="5">
                         <StackPanel Orientation="Horizontal">
                             <Button  Content="+" Command="{Binding CmdAjouter}"/>
-                            <Button   Content="&#x2212;" Command="{Binding CmdASupprimer}" />
+                            <Button   Content="-" Command="{Binding CmdSupprimer}" />
                             <Button  Content="&#x2713;" Command="{Binding CmdEnregistrer}" />
                                 <Button  Content="&#x21b6;" Command="{Binding CmdAnnuler}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" >
                             <Label Content="Tâche N°"/>
                             <TextBlock Text="{Binding Path=Taches/Id}" VerticalAlignment="Center"/>
-                            <Label Content="   crée le 17/01/2017"/>
+                            <Label Content="{Binding Path=Taches/Creation }"/>
                         </StackPanel>
                         <Label Content="Echéance"/>
-                        <DatePicker/>
+                        <DatePicker IsEnabled="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditActivation}}"/>
                         <DockPanel Margin="0,10,0,10">
-                            <CheckBox DockPanel.Dock="Right" IsChecked="True" Background="LightGray" Content="fait" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                            <CheckBox DockPanel.Dock="Right" IsChecked="True" Background="LightGray" Content="fait"
+                                      HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                                      IsEnabled="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditActivation}}" />
                             <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
                                 <Label Content="Priorité"/>
-                                <TextBox Text="{Binding Path=Taches/Prio}" VerticalContentAlignment="Center" Padding="4,0"   />
+                                <TextBox Text="{Binding Path=Taches/Prio}" VerticalContentAlignment="Center" Padding="4,0"
+                                         IsReadOnly="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditLectureSeule}}"  />
                             </StackPanel>
                         </DockPanel>
                     </StackPanel>
-                    <TextBox ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="0,0,0,30" TextWrapping="Wrap" Width="170"/>
+                    <TextBox ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="0,0,0,30" TextWrapping="Wrap" Width="170"
+                             IsReadOnly="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditLectureSeule}}"/>
                 </DockPanel>
             </Expander>
             <Label DockPanel.Dock="Top" Content="Liste des tâches" />

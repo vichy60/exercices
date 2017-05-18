@@ -13,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Saisie_de_taches
+namespace ExempleMVVM.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for UCMenu1.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UCMenu1 : UserControl
     {
-        public MainWindow()
+        public UCMenu1()
         {
             InitializeComponent();
-            
-            DataContext = new Contexte();
         }
     }
 }

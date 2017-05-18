@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="Trombinoscope.UCEmployes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Trombinoscope"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+	<UserControl.Resources>
+		<SolidColorBrush x:Key="CouleurEmploye" Color="AliceBlue"/>
+		<Style TargetType="Button">
+			<Setter Property="Width" Value="40"/>
+			<Setter Property="Height" Value="25"/>
+			<Setter Property="Margin" Value="0,0,5,0"/>
+		</Style>
+	</UserControl.Resources>
+
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="100"/>
+			<RowDefinition Height="60"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+
+		<Image Source="pack://application:,,,/Images/Employes.jpg" Height="100" Margin="10"/>
+		<ListView Grid.Row="2"
+                ItemsSource="{Binding Path=Employes}" IsSynchronizedWithCurrentItem="True">
+			<ListView.View>
+				<GridView AllowsColumnReorder="true">
+					<GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding Path=Id}"/>
+					<GridViewColumn Header="Nom" Width="100" DisplayMemberBinding="{Binding Path=Nom}"/>
+					<GridViewColumn Header="Prénom" Width="100" DisplayMemberBinding="{Binding Path=Prenom}"/>
+				</GridView>
+			</ListView.View>
+		</ListView>
+
+		<TextBlock Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource styleTitre}">
+         <TextBlock Name="tblId" Text="{Binding Path=Employes/Id}"/>
+         <TextBlock Name="tblNom" Text="{Binding Path=Employes/Nom}"/>
+         <TextBlock Name="tblPrenom" Text="{Binding Path=Employes/Prenom}"/>
+		</TextBlock>
+
+		<Grid  Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition Height="25"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Button Content="+" Command="{Binding CmdAjouter}"/>
+			<Button Grid.Column="1"  Content="-" Command="{Binding CmdSupprimer}"/>
+            <TextBox Grid.Row="1" Text="{Binding Path=NouvelEmploye.Nom}"/>
+			<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=NouvelEmploye.Prenom}"/>
+		</Grid>
+
+		<TextBlock Grid.Row="1"  Grid.Column="1"
+                    Text="{Binding Path=Territoires.Count, StringFormat='\{0\} territoires'}"
+				    HorizontalAlignment="Right" FontSize="16"/>
+		<ListView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Path=Employes/Territoires}">
+			<ListView.View>
+				<GridView AllowsColumnReorder="true">
+					<GridViewColumn Header="Code" Width="50" DisplayMemberBinding="{Binding Path=Code}"/>
+					<GridViewColumn Header="Description" Width="150" DisplayMemberBinding="{Binding Path=Description}"/>
+				</GridView>
+			</ListView.View>
+		</ListView>
+	</Grid>
+</UserControl>

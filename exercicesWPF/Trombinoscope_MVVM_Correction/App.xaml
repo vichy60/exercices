@@ -1,0 +1,23 @@
+﻿<Application x:Class="Trombinoscope.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Trombinoscope"
+             StartupUri="View/MainWindow.xaml">
+    <Application.Resources>
+		<Style x:Key="styleTitre">
+			<Setter Property="TextBlock.FontFamily" Value="Verdana"/>
+			<Setter Property="TextBlock.FontSize" Value="20"/>
+			<Setter Property="TextBlock.Background" Value="AliceBlue"/>
+			<Setter Property="TextBlock.HorizontalAlignment" Value="Center"/>
+		</Style>
+
+        <!-- DataTemplates qui associent les vues aux vues-modèles -->
+        <DataTemplate DataType="{x:Type local:ContexteEmploye}">
+            <local:UCEmployes/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type local:VMTrombi}">
+            <local:UCTrombi/>
+        </DataTemplate>
+    </Application.Resources>
+</Application>

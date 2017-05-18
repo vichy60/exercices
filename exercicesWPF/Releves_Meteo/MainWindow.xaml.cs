@@ -35,6 +35,12 @@ namespace Releves_Meteo
             bt_path.Click += Bt_path_Click;
             cbVue.SelectionChanged += CbVue_SelectionChanged;
             cbTri.SelectionChanged += CbTri_SelectionChanged;
+            cbTriSens.SelectionChanged += CbTriSens_SelectionChanged;
+        }
+
+        private void CbTriSens_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.Tri();
         }
 
         private void CbTri_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -115,7 +121,6 @@ namespace Releves_Meteo
             else
             {
                 view.SortDescriptions.Add(new SortDescription("Date", ListSortDirection.Ascending));
-
                 view.GroupDescriptions.Add(new PropertyGroupDescription("Année"));
                 lb_Données.ItemTemplate = (DataTemplate)this.Resources["Template_groupe"];
                 gdStatsVignette.Visibility = Visibility.Hidden;

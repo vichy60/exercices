@@ -10,21 +10,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Saisie_de_taches
+namespace Trombinoscope
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for WndAjoutEmploye.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class WndAjoutEmploye : Window
     {
-        public MainWindow()
+        public WndAjoutEmploye(Employe employe)
         {
             InitializeComponent();
-            
-            DataContext = new Contexte();
+
+            btnOK.Click += BtnOK_Click;
+            DataContext = employe;
+        }
+
+        private void BtnOK_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
         }
     }
 }
