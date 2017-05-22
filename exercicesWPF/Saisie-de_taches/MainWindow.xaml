@@ -35,9 +35,7 @@
                         <Label Content="Echéance"/>
                         <DatePicker IsEnabled="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditActivation}}"/>
                         <DockPanel Margin="0,10,0,10">
-                            <CheckBox DockPanel.Dock="Right" IsChecked="True" Background="LightGray" Content="fait"
-                                      HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                                      IsEnabled="{Binding Path=ModeEdit, Converter={StaticResource ConvModeEditActivation}}" />
+                            <CheckBox DockPanel.Dock="Right" IsChecked="True" Background="LightGray" Content="fait" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                             <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
                                 <Label Content="Priorité"/>
                                 <TextBox Text="{Binding Path=Taches/Prio}" VerticalContentAlignment="Center" Padding="4,0"
